@@ -14,8 +14,10 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
+    "csvtojson": "^2.0.10",
     "quasar": "^1.0.0",
-    "vue2-dropzone": "^3.6.0"
+    "vue2-dropzone": "^3.6.0",
+    "vuewordcloud": "^18.7.11"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0",
