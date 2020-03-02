@@ -69,7 +69,9 @@
 
 <script>
 import { CsvToJsonService } from '../../services/CsvToJsonService'
+import { mapGetters } from 'vuex'
 import sample from '../../samples/connections.json'
+import { getConnections } from '../../store/linkedin/getters'
 
 export default {
   name: 'ConnectionsPage',
@@ -121,12 +123,17 @@ export default {
         }
       ],
       data: [
-        ...sample
+        ...getConnections()
       ],
       selected: [
         ...sample
       ]
     }
+  },
+  computed: {
+    ...mapGetters([
+      'getConnections'
+    ])
   },
   methods: {
     getSelectedString () {
