@@ -37,7 +37,7 @@
             <div class="q-pa-md">
               <q-table
                 title="Connections"
-                :data="data"
+                :data="getConnections"
                 :columns="columns"
                 row-key="Row"
                 :selected-rows-label="getSelectedString"
@@ -71,7 +71,6 @@
 import { CsvToJsonService } from '../../services/CsvToJsonService'
 import { mapGetters } from 'vuex'
 import sample from '../../samples/connections.json'
-import { getConnections } from '../../store/linkedin/getters'
 
 export default {
   name: 'ConnectionsPage',
@@ -122,22 +121,19 @@ export default {
           sortable: true
         }
       ],
-      data: [
-        ...getConnections()
-      ],
       selected: [
         ...sample
       ]
     }
   },
   computed: {
-    ...mapGetters([
+    ...mapGetters('linkedin', [
       'getConnections'
     ])
   },
   methods: {
     getSelectedString () {
-      return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.data.length}`
+      return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.getConnections.length}`
     },
     doClick () {
       const csvToJsonService = new CsvToJsonService()

@@ -31,3 +31,5 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+src/samples/messages.csv
+src/samples/Contacts.csv

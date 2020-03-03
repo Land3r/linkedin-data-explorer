@@ -49,7 +49,11 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
+      {
+        path: '',
+        name: 'HomePage',
+        component: () => import('pages/Index.vue')
+      },
       { path: 'upload', component: () => import('pages/Upload.vue') }
     ]
   }

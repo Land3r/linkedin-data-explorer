@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          Linkedin Data Visualizer
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -26,14 +26,19 @@
       content-class="bg-grey-1"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
+        <q-item
+        :to="{ name: 'HomePage' }">
+          <q-item-label
+            header
+            class="text-grey-8"
+          >
+          <q-icon name="fab fa-linkedin" size="md" color="primary"/>
+            Linkedin Data Visualizer
+          </q-item-label>
+        </q-item>
+        <q-separator />
         <EssentialLink
-          v-for="link in essentialLinks"
+          v-for="link in getActiveViews"
           :key="link.title"
           v-bind="link"
         />
@@ -47,6 +52,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import EssentialLink from 'components/EssentialLink'
 
 export default {
@@ -98,6 +104,11 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapGetters('linkedin', [
+      'getActiveViews'
+    ])
   }
 }
 </script>
