@@ -26,6 +26,14 @@
       content-class="bg-grey-1"
     >
       <q-list>
+        <EssentialLink
+        v-bind="{
+          title: 'Upload',
+          label: '',
+          icon: 'cloud_upload',
+          link: 'UploadPage'
+        }"
+        />
         <q-item
         :to="{ name: 'HomePage' }">
           <q-item-label
