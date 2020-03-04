@@ -1,31 +1,29 @@
-export function setConnections (state, connections) {
-  state.connections = [...connections]
-}
 
-export function setContacts (state, contacts) {
-  state.contacts = [...contacts]
-}
+import * as types from './mutations-types'
 
-export function setInvitations (state, invitations) {
-  state.invitations = [...invitations]
-}
-
-export function setMessages (state, messages) {
-  state.messages = [...messages]
-}
-
-export function setProfile (state, profile) {
-  state.profile = { ...profile }
-}
-
-export function setRecommendationsGiven (state, recommendations) {
-  state.recommendationsgiven = [...recommendations]
-}
-
-export function setRecommendationsReceived (state, recommendations) {
-  state.recommendationsreceived = [...recommendations]
-}
-
-export function setRegistrations (state, registrations) {
-  state.registrations = [...registrations]
+export const mutations = {
+  [types.SET_CONNECTIONS] (state, connections) {
+    state.connections = [...connections]
+  },
+  [types.SET_CONTACTS] (state, contacts) {
+    state.contacts = [...contacts]
+  },
+  [types.SET_INVITATIONS] (state, invitations) {
+    state.invitations = [...invitations]
+  },
+  [types.SET_MESSAGES] (state, messages) {
+    state.messages = [...messages]
+  },
+  [types.SET_PROFILE] (state, profile) {
+    state.profile = { ...profile }
+  },
+  [types.SET_RECOMMENDATIONS_GIVEN] (state, recommendations) {
+    state.recommendationsgiven = [...recommendations]
+  },
+  [types.SET_RECOMMENDATIONS_RECEIVED] (state, recommendations) {
+    state.recommendationsreceived = [...recommendations]
+  },
+  [types.SET_REGISTRATIONS] (state, registrations) {
+    state.registrations = [...registrations]
+  }
 }

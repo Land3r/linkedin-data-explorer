@@ -1,7 +1,7 @@
 import * as csv from 'csvtojson'
 
-export function convertToJson (clob) {
-  csv().fromString(clob).then((json) => {
+export async function convertToJson (clob) {
+  return csv().fromString(clob).then((json) => {
     return new Promise((resolve, reject) => {
       resolve(json)
     })

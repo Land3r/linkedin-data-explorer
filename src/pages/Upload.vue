@@ -16,6 +16,10 @@
 <script>
 import UploadArea from '../components/UploadArea'
 import { convertToJson } from '../services/CsvToJsonService'
+import { LinkedinFileName } from '../data/linkedin-filenames'
+
+import { vuexNamespaced } from '../helpers/vuexHelper'
+import * as actionstypes from '../store/linkedin/actions-types'
 
 export default {
   name: 'UploadPage',
@@ -35,31 +39,32 @@ export default {
       let result = ''
 
       switch (file.name.toLowerCase()) {
-        case 'Connections.csv'.toLowerCase():
+        case LinkedinFileName.connections.toLowerCase():
           console.log('File connections detected...')
+          this.$store.dispatch(vuexNamespaced('linkedin', actionstypes.LOAD_CONNECTIONS), file.result)
           break
-        case 'Contacts.csv'.toLowerCase():
+        case LinkedinFileName.contacts.toLowerCase():
           console.log('File contacts detected...')
           break
-        case 'Invitations.csv'.toLowerCase():
+        case LinkedinFileName.invitations.toLowerCase():
           console.log('File invitations detected...')
 
           result = convertToJson(file.result)
           result.then((res) => console.dir(res))
           break
-        case 'Messages.csv'.toLowerCase():
+        case LinkedinFileName.messages.toLowerCase():
           console.log('File messages detected...')
           break
-        case 'Profile.csv'.toLowerCase():
+        case LinkedinFileName.profile.toLowerCase():
           console.log('File profile detected...')
           break
-        case 'Recommendations Given.csv'.toLowerCase():
+        case LinkedinFileName.recommendationsGiven.toLowerCase():
           console.log('File recommendations given detected...')
           break
-        case 'Recommendations Received.csv'.toLowerCase():
+        case LinkedinFileName.recommendationsReceived.toLowerCase():
           console.log('File recommendations received detected...')
           break
-        case 'Registration.csv'.toLowerCase():
+        case LinkedinFileName.registrations.toLowerCase():
           console.log('File registration detected...')
           break
         default:
