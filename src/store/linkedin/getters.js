@@ -65,7 +65,7 @@ export function getActiveViews (state) {
       link: 'MessagesPage'
     })
   }
-  if (state.profile) {
+  if (state.profile !== null) {
     activeViews.push({
       title: 'Profile',
       caption: '',

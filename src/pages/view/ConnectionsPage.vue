@@ -8,11 +8,6 @@
       </q-breadcrumbs>
     </div>
 
-    <div>
-      Temp
-      <q-btn @click="doClick" label="Test"/>
-    </div>
-
     <div class="q-pa-md">
       <div class="q-gutter-y-md">
       <q-card>
@@ -42,6 +37,7 @@
                 row-key="Row"
                 :selected-rows-label="getSelectedString"
                 selection="multiple"
+                :pagination.sync="pagination"
                 :selected.sync="selected"
               />
             </div>
@@ -54,7 +50,9 @@
 
           <q-tab-panel name="words">
             <div class="text-h6">Words</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <vue-word-cloud :words="words">
+
+            </vue-word-cloud>
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -68,15 +66,18 @@
 </style>
 
 <script>
-import { CsvToJsonService } from '../../services/CsvToJsonService'
 import { mapGetters } from 'vuex'
-import sample from '../../samples/connections.json'
+
+import StringAnalysisService from '../../services/StringAnalysisService'
 
 export default {
   name: 'ConnectionsPage',
   data () {
     return {
       activeTab: 'raw',
+      pagination: {
+        rowsPerPage: 50
+      },
       columns: [
         {
           name: 'firstname',
@@ -121,23 +122,23 @@ export default {
           sortable: true
         }
       ],
-      selected: [
-        ...sample
-      ]
+      selected: []
     }
   },
   computed: {
     ...mapGetters('linkedin', [
       'getConnections'
-    ])
+    ]),
+    wordsWithWeight () {
+      const strings = this.getConnections.map((element) => { return element['First Name'] + ' ' + element['Last Name'] + ' ' + element['Email Address'] + ' ' + element.Company + ' ' + element.Position }).join(' ')
+      const stringAnalysisService = new StringAnalysisService()
+      stringAnalysisService.load(strings)
+      return stringAnalysisService.analyze()
+    }
   },
   methods: {
     getSelectedString () {
       return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.getConnections.length}`
-    },
-    doClick () {
-      const csvToJsonService = new CsvToJsonService()
-      csvToJsonService.getSample()
     }
   }
 }

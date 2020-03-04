@@ -1,6 +1,8 @@
 import * as actionstypes from './actions-types'
 import * as mutationstypes from './mutations-types'
 
+import { Notify } from 'quasar'
+
 import { convertToJson } from '../../services/CsvToJsonService'
 
 export const actions = {
@@ -8,29 +10,128 @@ export const actions = {
     const jsonPromise = convertToJson(connections)
     jsonPromise.then((json) => {
       commit(mutationstypes.SET_CONNECTIONS, json)
+      Notify.create({
+        type: 'positive',
+        message: 'Connections imported.'
+      })
     }).catch((err) => {
+      Notify.create({
+        type: 'negative',
+        message: 'Impossible to import the connections.'
+      })
       console.error(err)
     })
   },
   [actionstypes.LOAD_CONTACTS] ({ commit }, contacts) {
-    commit(mutationstypes.SET_CONTACTS, contacts)
+    const jsonPromise = convertToJson(contacts)
+    jsonPromise.then((json) => {
+      commit(mutationstypes.SET_CONTACTS, json)
+      Notify.create({
+        type: 'positive',
+        message: 'Contacts imported.'
+      })
+    }).catch((err) => {
+      Notify.create({
+        type: 'negative',
+        message: 'Impossible to import the contacts.'
+      })
+      console.error(err)
+    })
   },
   [actionstypes.LOAD_INVITATIONS] ({ commit }, invitations) {
-    commit(mutationstypes.SET_INVITATIONS, invitations)
+    const jsonPromise = convertToJson(invitations)
+    jsonPromise.then((json) => {
+      commit(mutationstypes.SET_INVITATIONS, json)
+      Notify.create({
+        type: 'positive',
+        message: 'Invitations imported.'
+      })
+    }).catch((err) => {
+      Notify.create({
+        type: 'negative',
+        message: 'Impossible to import the invitations.'
+      })
+      console.error(err)
+    })
   },
   [actionstypes.LOAD_MESSAGES] ({ commit }, messages) {
-    commit(mutationstypes.SET_MESSAGES, messages)
+    const jsonPromise = convertToJson(messages)
+    jsonPromise.then((json) => {
+      commit(mutationstypes.SET_MESSAGES, json)
+      Notify.create({
+        type: 'positive',
+        message: 'Messages imported.'
+      })
+    }).catch((err) => {
+      Notify.create({
+        type: 'negative',
+        message: 'Impossible to import the messages.'
+      })
+      console.error(err)
+    })
   },
   [actionstypes.LOAD_PROFILE] ({ commit }, profile) {
-    commit(mutationstypes.SET_PROFILE, profile)
+    const jsonPromise = convertToJson(profile)
+    jsonPromise.then((json) => {
+      commit(mutationstypes.SET_PROFILE, json)
+      Notify.create({
+        type: 'positive',
+        message: 'Profile imported.'
+      })
+    }).catch((err) => {
+      Notify.create({
+        type: 'negative',
+        message: 'Impossible to import the profile.'
+      })
+      console.error(err)
+    })
   },
   [actionstypes.LOAD_RECOMMENDATIONS_GIVEN] ({ commit }, recommendationsGiven) {
-    commit(mutationstypes.SET_RECOMMENDATIONS_GIVEN, recommendationsGiven)
+    const jsonPromise = convertToJson(recommendationsGiven)
+    jsonPromise.then((json) => {
+      commit(mutationstypes.SET_RECOMMENDATIONS_GIVEN, json)
+      Notify.create({
+        type: 'positive',
+        message: 'Recommendations given imported.'
+      })
+    }).catch((err) => {
+      Notify.create({
+        type: 'negative',
+        message: 'Impossible to import the given recommendations.'
+      })
+      console.error(err)
+    })
   },
   [actionstypes.LOAD_RECOMMENDATIONS_RECEIVED] ({ commit }, recommendationsReceived) {
-    commit(mutationstypes.SET_RECOMMENDATIONS_RECEIVED, recommendationsReceived)
+    const jsonPromise = convertToJson(recommendationsReceived)
+    jsonPromise.then((json) => {
+      commit(mutationstypes.SET_RECOMMENDATIONS_RECEIVED, json)
+      Notify.create({
+        type: 'positive',
+        message: 'Recommendations received imported.'
+      })
+    }).catch((err) => {
+      Notify.create({
+        type: 'negative',
+        message: 'Impossible to import the received recommendations.'
+      })
+      console.error(err)
+    })
   },
   [actionstypes.LOAD_REGISTRATIONS] ({ commit }, registrations) {
-    commit(mutationstypes.SET_REGISTRATIONS, registrations)
+    const jsonPromise = convertToJson(registrations)
+    jsonPromise.then((json) => {
+      commit(mutationstypes.SET_INVITATIONS, json)
+      Notify.create({
+        type: 'positive',
+        message: 'Registrations imported.'
+      })
+    }).catch((err) => {
+      Notify.create({
+        type: 'negative',
+        message: 'Impossible to import the registrations.'
+      })
+      console.error(err)
+    })
   }
 }

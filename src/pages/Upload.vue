@@ -15,7 +15,6 @@
 
 <script>
 import UploadArea from '../components/UploadArea'
-import { convertToJson } from '../services/CsvToJsonService'
 import { LinkedinFileName } from '../data/linkedin-filenames'
 
 import { vuexNamespaced } from '../helpers/vuexHelper'
@@ -36,8 +35,6 @@ export default {
      * Event receiver for when a file is fully loaded.
      */
     onFileLoaded (file) {
-      let result = ''
-
       switch (file.name.toLowerCase()) {
         case LinkedinFileName.connections.toLowerCase():
           console.log('File connections detected...')
@@ -45,27 +42,31 @@ export default {
           break
         case LinkedinFileName.contacts.toLowerCase():
           console.log('File contacts detected...')
+          this.$store.dispatch(vuexNamespaced('linkedin', actionstypes.LOAD_CONTACTS), file.result)
           break
         case LinkedinFileName.invitations.toLowerCase():
           console.log('File invitations detected...')
-
-          result = convertToJson(file.result)
-          result.then((res) => console.dir(res))
+          this.$store.dispatch(vuexNamespaced('linkedin', actionstypes.LOAD_INVITATIONS), file.result)
           break
         case LinkedinFileName.messages.toLowerCase():
           console.log('File messages detected...')
+          this.$store.dispatch(vuexNamespaced('linkedin', actionstypes.LOAD_MESSAGES), file.result)
           break
         case LinkedinFileName.profile.toLowerCase():
           console.log('File profile detected...')
+          this.$store.dispatch(vuexNamespaced('linkedin', actionstypes.LOAD_PROFILE), file.result)
           break
         case LinkedinFileName.recommendationsGiven.toLowerCase():
           console.log('File recommendations given detected...')
+          this.$store.dispatch(vuexNamespaced('linkedin', actionstypes.LOAD_RECOMMENDATIONS_GIVEN), file.result)
           break
         case LinkedinFileName.recommendationsReceived.toLowerCase():
           console.log('File recommendations received detected...')
+          this.$store.dispatch(vuexNamespaced('linkedin', actionstypes.LOAD_RECOMMENDATIONS_RECEIVED), file.result)
           break
         case LinkedinFileName.registrations.toLowerCase():
           console.log('File registration detected...')
+          this.$store.dispatch(vuexNamespaced('linkedin', actionstypes.LOAD_REGISTRATIONS), file.result)
           break
         default:
           console.error(`Unknown file detected : ${file.name}`)
