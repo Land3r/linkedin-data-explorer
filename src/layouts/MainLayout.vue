@@ -26,14 +26,6 @@
       content-class="bg-grey-1"
     >
       <q-list>
-        <EssentialLink
-        v-bind="{
-          title: 'Upload',
-          label: '',
-          icon: 'cloud_upload',
-          link: 'UploadPage'
-        }"
-        />
         <q-item
         :to="{ name: 'HomePage' }">
           <q-item-label
@@ -44,6 +36,15 @@
             Linkedin Data Visualizer
           </q-item-label>
         </q-item>
+        <q-separator />
+        <EssentialLink
+        v-bind="{
+          title: 'Upload',
+          label: '',
+          icon: 'cloud_upload',
+          link: 'UploadPage'
+        }"
+        />
         <q-separator />
         <EssentialLink
           v-for="link in getActiveViews"
