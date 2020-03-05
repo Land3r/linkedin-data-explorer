@@ -15,6 +15,8 @@
                 <label>Maximum words
                   <q-slider
                     v-model="maxWords"
+                    :min="5"
+                    :max="300"
                     label
                   />
                 </label>
