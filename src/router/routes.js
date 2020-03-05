@@ -58,6 +58,11 @@ const routes = [
         path: 'upload',
         name: 'UploadPage',
         component: () => import('pages/Upload.vue')
+      },
+      {
+        path: 'dataoverview',
+        name: 'DataOverviewPage',
+        component: () => import('pages/DataOverviewPage.vue')
       }
     ]
   }

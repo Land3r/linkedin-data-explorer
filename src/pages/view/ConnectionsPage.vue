@@ -49,14 +49,7 @@
           </q-tab-panel>
 
           <q-tab-panel name="words">
-            <div class="text-h6">Words</div>
-            <div style="height: 500px;">
-              <vue-word-cloud
-              :words="wordsWithWeight"
-              :color="([, weight]) => weight > 10 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
-              font-family="Roboto"
-            />
-            </div>
+            <words-cloud-container :words="wordsWithWeight" />
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -71,24 +64,24 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import VueWordCloud from 'vuewordcloud'
 
+import WordsCloudContainer from '../../components/WordsCloudContainer'
 import StringAnalysisService from '../../services/StringAnalysisService'
 
 export default {
   name: 'ConnectionsPage',
   components: {
-    'vue-word-cloud': VueWordCloud
+    'words-cloud-container': WordsCloudContainer
   },
   data () {
     return {
       activeTab: 'raw',
+      pagination: {
+        rowsPerPage: 50
+      },
       wordscloud: {
         maxWords: 100,
         cleanLocalized: true
-      },
-      pagination: {
-        rowsPerPage: 50
       },
       columns: [
         {

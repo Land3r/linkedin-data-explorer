@@ -59,7 +59,7 @@ export default class StringAnalysisService {
       .replace('"', ' ')
       .replace('\'', ' ')
       .replace('/', ' ')
-      .replace('  ', '')
+      .replace('  ', ' ')
     return output
   }
 
@@ -73,6 +73,7 @@ export default class StringAnalysisService {
       .replace(' la ', ' ')
       .replace(' le ', ' ')
       .replace(' the ', ' ')
+      .replace('  ', ' ')
     return output
   }
 }
