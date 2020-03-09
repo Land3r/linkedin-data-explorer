@@ -49,7 +49,11 @@
           </q-tab-panel>
 
           <q-tab-panel name="words">
-            <words-cloud-container :words="wordsWithWeight" />
+            <words-cloud-container
+              :words="wordsWithWeight"
+              :changeMaxWords="changeMaxWords"
+              :changeCleanLocalized="changeCleanLocalized"
+              />
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -146,6 +150,12 @@ export default {
   methods: {
     getSelectedString () {
       return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.getConnections.length}`
+    },
+    changeMaxWords (newMaxWords) {
+      this.wordscloud.maxWords = newMaxWords
+    },
+    changeCleanLocalized (newCleanLocalizedValue) {
+      this.wordscloud.cleanLocalized = newCleanLocalizedValue
     }
   }
 }
