@@ -2,7 +2,7 @@
   <div>
     <div class="text-h6">Words</div>
     <div>
-      <div style="">
+      <div>
         <q-list bordered class="rounded-borders">
           <q-expansion-item
             switch-toggle-side
@@ -13,20 +13,20 @@
             <q-card>
               <q-card-section>
                 <div class="row">
-                  <div class="col">
-                    <label>Enable Language Cleaning
-                      <q-toggle
-                       v-model="cleanLocalized"
-                       icon="verified_user"
-                      />
-                    </label>
-                    <br />
+                  <div class="col q-pa-md">
                     <label>Maximum words
                       <q-slider
                         v-model="maxWords"
                         :min="5"
                         :max="300"
                         label
+                      />
+                    </label>
+                    <br />
+                    <label>Enable Language Cleaning
+                      <q-toggle
+                       v-model="cleanLocalized"
+                       icon="verified_user"
                       />
                     </label>
                     <br />
@@ -58,7 +58,30 @@
                       />
                     </label>
                   </div>
-                  <div class="col">
+                  <div class="col q-pa-md">
+                    <label>Random Coloring ?
+                      <q-toggle
+                        v-model="randomColoring"
+                      />
+                    </label>
+                    <br />
+                    <label>Color Schemes
+                      <q-radio
+                        v-model="colors"
+                        v-for="(color, key) in available.colors.schemes"
+                        v-bind:key="key"
+                        :val="color"
+                      >
+                        <template v-slot:default>
+                          <img
+                            :src="assetFunction(color.svg)"
+                            height="24px"
+                            width="24px"
+                          />
+                        </template>
+                      </q-radio>
+                    </label>
+                    <br />
                     <label>Animation
                       <q-select
                         label="Animation"
@@ -80,27 +103,8 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <label>Random Coloring ?
-                      <q-toggle
-                        v-model="randomColoring"
-                      />
-                    </label>
-                    <br />
-                    <label>Color Schemes
-                      <q-radio
-                        v-model="colors"
-                        v-for="(color, key, index) in available.colors.schemes"
-                        v-bind:key="index"
-                        :val="color"
-                      >
-                        <template v-slot:default>
-                          lol
-                          <img :src="color.svg" />
-                        </template>
-                      </q-radio>
-                    </label>
                   </div>
-                  <div class="col"></div>
+                  <div class="col">TEST</div>
                 </div>
               </q-card-section>
             </q-card>
@@ -168,6 +172,12 @@ export default {
       available: {
         ...DefaultWordCloudConfig
       }
+    }
+  },
+  methods: {
+    assetFunction (imageName) {
+      var colors = require.context('../assets/colors/', false, /\.svg$/)
+      return colors(`./${imageName}.svg`)
     }
   },
   computed: {

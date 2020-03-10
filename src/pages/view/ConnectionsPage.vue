@@ -1,15 +1,7 @@
 <template>
   <q-page>
-    <div class="q-pa-md q-gutter-sm">
-      <q-breadcrumbs>
-        <q-breadcrumbs-el icon="home" :to="{ name: 'HomePage' }" />
-        <q-breadcrumbs-el label="Data overview" icon="widgets" :to="{ name: 'DataOverviewPage' }" />
-        <q-breadcrumbs-el label="Connections" icon="transfer_within_a_station" />
-      </q-breadcrumbs>
-    </div>
-
-    <div class="q-pa-md">
-      <div class="q-gutter-y-md">
+    <navigation-bar :breadcrumbs="breadcrumbs"/>
+    <div class="q-pa-md q-gutter-y-md">
       <q-card>
         <q-tabs
           v-model="activeTab"
@@ -58,7 +50,6 @@
         </q-tab-panels>
       </q-card>
     </div>
-    </div>
   </q-page>
 </template>
 
@@ -69,16 +60,32 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import WordsCloudContainer from '../../components/WordsCloudContainer'
+import WordsCloudContainer from 'components/WordsCloudContainer'
+import NavigationBar from 'components/navigation/NavigationBar'
 import StringAnalysisService from '../../services/StringAnalysisService'
 
 export default {
   name: 'ConnectionsPage',
   components: {
+    'navigation-bar': NavigationBar,
     'words-cloud-container': WordsCloudContainer
   },
   data () {
     return {
+      breadcrumbs: [
+        {
+          icon: 'fab fa-linkedin'
+        },
+        {
+          label: 'Data Overview',
+          icon: 'widgets',
+          to: { name: 'DataOverviewPage' }
+        },
+        {
+          label: 'Connections',
+          icon: 'transfer_within_a_station'
+        }
+      ],
       activeTab: 'raw',
       pagination: {
         rowsPerPage: 50
@@ -143,7 +150,6 @@ export default {
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const result = stringAnalysisService.analyze(this.wordscloud.maxWords, this.wordscloud.cleanLocalized)
-      console.dir(result)
       return result
     }
   },

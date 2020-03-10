@@ -8,14 +8,63 @@
     </q-banner>
   </div>
   <div v-else>
-    <label class="text-reader">
-      <input type="file" @change="loadTextFromFile" multiple>
+    <label class="text-reader" v-show="false">
+      <input ref="input_file" type="file" @change="loadFileListFromInput" multiple>
     </label>
+    <div
+      class="dropzone q-pa-lg"
+      v-bind:class="{'is-dragover':isDrag}"
+      @click="$refs.input_file.click()"
+      @drag="handleDrag"
+      @dragstart="handleDrag"
+      @dragenter="handleDrag"
+      @dragover="handleDrag"
+      @dragend="handleDrag"
+      @dragleave="handleDrag"
+      @drop="loadFileListFromDrop"
+      >
+      <div class="dropzone-custom-content">
+        <h3 class="dropzone-custom-title">Drag in your Linkedin export</h3>
+        <q-icon name="fab fa-linkedin" color="primary" size="xl" />
+        <div class="subtitle">... or click to select a file from your computer</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang='scss'>
+.dropzone {
+  min-width: 200px;
+  background-color: #47617521;
+  cursor: pointer;
+  border: dashed #5678924b;
 
+  &:hover {
+    background-color: #56789280;
+    border-color: #5678924b;
+    border-style: inset;
+  }
+}
+
+.is-dragover {
+    background-color: #56789280;
+    border-style: inset;
+  }
+
+.dropzone-custom-content {
+  text-align: center;
+}
+
+.dropzone-custom-title {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: #00b782;
+}
+
+.subtitle {
+  margin-top: 1em;
+  color: #314b5f;
+}
 </style>
 
 <script>
@@ -27,6 +76,7 @@ export default {
   },
   data () {
     return {
+      isDrag: false
     }
   },
   computed: {
@@ -43,10 +93,9 @@ export default {
   },
   methods: {
     /**
-     * Gets the file as text, using the HTML5 FileReader API.
+     * Gets the FileList of the input event.
      */
-    loadTextFromFile (ev) {
-      // Multiple files or only one file ?
+    loadFileListFromInput (ev) {
       if (ev.target.files.length > 0) {
         Array.from(ev.target.files).forEach(file => {
           const reader = new FileReader()
@@ -57,6 +106,33 @@ export default {
           reader.readAsText(file)
         })
       }
+    },
+    /**
+     * Gets the FileList of the drop event.
+     */
+    loadFileListFromDrop (ev) {
+      if (ev.dataTransfer.files.length > 0) {
+        Array.from(ev.dataTransfer.files).forEach(file => {
+          const reader = new FileReader()
+          reader.onload = e => this.$emit('load', {
+            name: file.name,
+            result: e.target.result
+          })
+          reader.readAsText(file)
+        })
+      }
+    },
+    /**
+     * Handles the dragstyles updates.
+     */
+    handleDrag (event) {
+      if (event.type === 'dragover' || event.type === 'dragenter') {
+        this.isDrag = true
+      } else if (event.type === 'dragleave' || event.type === 'dragend') {
+        this.isDrag = false
+      }
+      event.preventDefault()
+      event.stopPropagation()
     }
   }
 }

@@ -51,8 +51,7 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'HomePage',
-        component: () => import('pages/Index.vue')
+        component: () => import('pages/Upload.vue')
       },
       {
         path: 'upload',

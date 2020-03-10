@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'EssentialLink',
+  name: 'NavigationMenuLink',
   props: {
     title: {
       type: String,

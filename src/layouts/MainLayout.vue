@@ -27,7 +27,7 @@
     >
       <q-list>
         <q-item
-        :to="{ name: 'HomePage' }">
+        :to="{ name: 'DataOverviewPage' }">
           <q-item-label
             header
             class="text-grey-8"
@@ -37,7 +37,7 @@
           </q-item-label>
         </q-item>
         <q-separator />
-        <EssentialLink
+        <navigation-menu-link
         v-bind="{
           title: 'Upload',
           label: '',
@@ -46,7 +46,7 @@
         }"
         />
         <q-separator />
-        <EssentialLink
+        <navigation-menu-link
           v-for="link in getActiveViews"
           :key="link.title"
           v-bind="link"
@@ -63,12 +63,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import EssentialLink from 'components/EssentialLink'
+import NavigationMenuLink from 'components/navigation/NavigationMenuLink'
 
 export default {
   name: 'MainLayout',
   components: {
-    EssentialLink
+    'navigation-menu-link': NavigationMenuLink
   },
   data () {
     return {

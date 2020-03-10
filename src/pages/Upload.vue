@@ -1,20 +1,19 @@
 <template>
-  <q-page class=''>
+  <q-page>
+    <navigation-bar :breadcrumbs="breadcrumbs" />
+    <div class='flex flex-center'>
     <upload-area @load="onFileLoaded($event)">
-
     </upload-area>
-    <output id="dropzone_files">
-      {{uploadtext}}
-    </output>
+    </div>
   </q-page>
 </template>
 
 <style lang="scss">
-
 </style>
 
 <script>
-import UploadArea from '../components/UploadArea'
+import NavigationBar from 'components/navigation/NavigationBar'
+import UploadArea from 'components/UploadArea'
 import { LinkedinFileName } from '../data/linkedin-filenames'
 
 import { vuexNamespaced } from '../helpers/vuexHelper'
@@ -23,11 +22,20 @@ import * as actionstypes from '../store/linkedin/actions-types'
 export default {
   name: 'UploadPage',
   components: {
+    'navigation-bar': NavigationBar,
     'upload-area': UploadArea
   },
   data () {
     return {
-      uploadtext: ''
+      breadcrumbs: [
+        {
+          icon: 'fab fa-linkedin'
+        },
+        {
+          label: 'Upload',
+          icon: 'cloud_upload'
+        }
+      ]
     }
   },
   methods: {
@@ -72,8 +80,6 @@ export default {
           console.error(`Unknown file detected : ${file.name}`)
           break
       }
-
-      this.uploadtext += `File ${file.name}: ${file.result} \r\n`
     }
   }
 }

@@ -42,185 +42,22 @@ export const DefaultWordCloudConfig = {
       {
         id: 0,
         colors: ['#403030', '#f97a7a'],
-        svg: (function () {
-          var div = document.createElement('div')
-          div.appendChild((function () {
-            var svg = document.createElementNS(svgNS, 'svg')
-            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
-            svg.setAttribute('height', '12')
-            svg.setAttribute('width', '12')
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '0')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '6')
-              rectangle.setAttribute('fill', '#403030')
-              return rectangle
-            })())
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '6')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '6')
-              rectangle.setAttribute('fill', '#f97a7a')
-              return rectangle
-            })())
-            return svg
-          })())
-          return div.innerHTML
-        })()
+        svg: 'bicolor'
       },
       {
         id: 1,
         colors: ['#d99cd1', '#c99cd1', '#b99cd1', '#a99cd1'],
-        svg: (function () {
-          var div = document.createElement('div')
-          div.appendChild((function () {
-            var svg = document.createElementNS(svgNS, 'svg')
-            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
-            svg.setAttribute('viewBox', '0 0 12 12')
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '0')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '3')
-              rectangle.setAttribute('fill', '#d99cd1')
-              return rectangle
-            })())
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '3')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '3')
-              rectangle.setAttribute('fill', '#c99cd1')
-              return rectangle
-            })())
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '6')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '3')
-              rectangle.setAttribute('fill', '#b99cd1')
-              return rectangle
-            })())
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '9')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '3')
-              rectangle.setAttribute('fill', '#a99cd1')
-              return rectangle
-            })())
-            return svg
-          })())
-          return URL.createObjectURL(new Blob([div.innerHTML], { type: 'image/svg+xml' }))
-        })()
+        svg: 'quadricolor'
       },
       {
         id: 2,
         colors: ['#31a50d', '#d1b022', '#74482a'],
-        svg: (function () {
-          var div = document.createElement('div')
-          div.appendChild((function () {
-            var svg = document.createElementNS(svgNS, 'svg')
-            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
-            svg.setAttribute('viewBox', '0 0 12 12')
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '0')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '4')
-              rectangle.setAttribute('fill', '#31a50d')
-              return rectangle
-            })())
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '4')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '4')
-              rectangle.setAttribute('fill', '#d1b022')
-              return rectangle
-            })())
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '8')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '4')
-              rectangle.setAttribute('fill', '#74482a')
-              return rectangle
-            })())
-            return svg
-          })())
-          return URL.createObjectURL(new Blob([div.innerHTML], { type: 'image/svg+xml' }))
-        })()
+        svg: 'tricolor'
       },
       {
         id: 3,
         colors: ['#ffd077', '#3bc4c7', '#3a9eea', '#ff4e69', '#461e47'],
-        svg: (function () {
-          var div = document.createElement('div')
-          div.appendChild((function () {
-            var svg = document.createElementNS(svgNS, 'svg')
-            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
-            svg.setAttribute('viewBox', '0 0 10 10')
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '0')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '2')
-              rectangle.setAttribute('fill', '#ffd077')
-              return rectangle
-            })())
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '2')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '2')
-              rectangle.setAttribute('fill', '#3bc4c7')
-              return rectangle
-            })())
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '4')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '2')
-              rectangle.setAttribute('fill', '#3a9eea')
-              return rectangle
-            })())
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '6')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '2')
-              rectangle.setAttribute('fill', '#ff4e69')
-              return rectangle
-            })())
-            svg.appendChild((function () {
-              var rectangle = document.createElementNS(svgNS, 'rectangle')
-              rectangle.setAttribute('x', '8')
-              rectangle.setAttribute('y', '0')
-              rectangle.setAttribute('height', '100%')
-              rectangle.setAttribute('width', '2')
-              rectangle.setAttribute('fill', '#461e47')
-              return rectangle
-            })())
-            return svg
-          })())
-          return URL.createObjectURL(new Blob([div.innerHTML], { type: 'image/svg+xml' }))
-        })()
+        svg: 'pentacolor'
       }
     ],
     functions: {
