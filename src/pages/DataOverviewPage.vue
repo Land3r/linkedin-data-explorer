@@ -34,7 +34,13 @@
             <q-item-section middle>
 
               <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary text-uppercase">
-                <span class="cursor-pointer">View</span>
+                <q-item
+                  clickable
+                  tag="a"
+                  class="cursor-pointer inline"
+                  :to="data.to">
+                  View
+                </q-item>
               </q-item-label>
             </q-item-section>
 
@@ -45,7 +51,7 @@
             </q-item-section>
           </q-item>
           <q-separator
-            v-bind:key="data.id"
+            v-bind:key="data.id + '-sep'"
             v-if="(key + 1 !== getDataState.length)"
             spaced
           />
@@ -94,49 +100,57 @@ export default {
           id: 'connections',
           label: 'Connections',
           icon: 'transfer_within_a_station',
-          length: this.getConnections.length
+          length: this.getConnections.length,
+          to: { name: 'ConnectionsPage' }
         },
         {
           id: 'contacts',
           label: 'Contacts',
           icon: 'contacts',
-          length: this.getContacts.length
+          length: this.getContacts.length,
+          to: { name: 'ContactsPage' }
         },
         {
           id: 'invitations',
           label: 'Invitations',
           icon: 'mail_outline',
-          length: this.getInvitations.length
+          length: this.getInvitations.length,
+          to: { name: 'InvitationsPage' }
         },
         {
           id: 'messages',
           label: 'Messages',
           icon: 'message',
-          length: this.getMessages.length
+          length: this.getMessages.length,
+          to: { name: 'MessagesPage' }
         },
         {
           id: 'profile',
           label: 'Profile',
           icon: 'perm_identity',
-          length: this.getProfile !== null
+          length: this.getProfile !== null,
+          to: { name: 'ProfilePage' }
         },
         {
           id: 'recommendationsgiven',
           label: 'Recommendations Given',
           icon: 'message',
-          length: this.getRecommendationsGiven.length
+          length: this.getRecommendationsGiven.length,
+          to: { name: 'RecommendationsGivenPage' }
         },
         {
           id: 'recommendationsreceived',
           label: 'Recommendations Received',
           icon: 'message',
-          length: this.getRecommendationsReceived.length
+          length: this.getRecommendationsReceived.length,
+          to: { name: 'RecommendationsReceivedPage' }
         },
         {
           id: 'registrations',
           label: 'Registrations',
           icon: null,
-          length: this.getRegistrations.length
+          length: this.getRegistrations.length,
+          to: { name: 'RegistrationsPage' }
         }
       ]
     }
