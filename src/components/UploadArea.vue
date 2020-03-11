@@ -23,10 +23,10 @@
       @dragleave="handleDrag"
       @drop="loadFileListFromDrop"
       >
-      <div class="dropzone-custom-content">
-        <h3 class="dropzone-custom-title">Drag in your Linkedin export</h3>
+      <div class="dropzone-content">
+        <h3 class="dropzone-title">Drag in your Linkedin export</h3>
         <q-icon name="fab fa-linkedin" color="primary" size="xl" />
-        <div class="subtitle">... or click to select a file from your computer</div>
+        <div class="dropzone-subtitle">... or click to select a file from your computer</div>
       </div>
     </div>
   </div>
@@ -44,36 +44,32 @@
     border-color: #5678924b;
     border-style: inset;
   }
+
+  &-content {
+    text-align: center;
+  }
+
+  &-title {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    color: #00b782;
+  }
+
+  &-subtitle {
+  margin-top: 1em;
+  color: #314b5f;
+}
 }
 
 .is-dragover {
-    background-color: #56789280;
-    border-style: inset;
-  }
-
-.dropzone-custom-content {
-  text-align: center;
-}
-
-.dropzone-custom-title {
-  margin-top: 0;
-  margin-bottom: 0.5em;
-  color: #00b782;
-}
-
-.subtitle {
-  margin-top: 1em;
-  color: #314b5f;
+  background-color: #56789280;
+  border-style: inset;
 }
 </style>
 
 <script>
 export default {
   name: 'UploadArea',
-  props: {
-  },
-  components: {
-  },
   data () {
     return {
       isDrag: false
