@@ -66,6 +66,7 @@
                     </label>
                     <br />
                     <label>Color Schemes
+                      <br />
                       <q-radio
                         v-model="colors"
                         v-for="(color, key) in available.colors.schemes"
@@ -74,7 +75,7 @@
                       >
                         <template v-slot:default>
                           <img
-                            :src="assetFunction(color.svg)"
+                            :src="getColorAsset(color.svg)"
                             height="24px"
                             width="24px"
                           />
@@ -104,7 +105,25 @@
                 <div class="row">
                   <div class="col">
                   </div>
-                  <div class="col">TEST</div>
+                  <div class="col">
+                    <label>Orientation
+                      <br />
+                      <q-radio
+                        v-model="rotation"
+                        v-for="(orientation, key) in available.rotations"
+                        v-bind:key="key"
+                        :val="orientation"
+                      >
+                        <template v-slot:default>
+                          <img
+                            :src="getRotationAsset(orientation.svg)"
+                            height="24px"
+                            width="24px"
+                          />
+                        </template>
+                      </q-radio>
+                    </label>
+                  </div>
                 </div>
               </q-card-section>
             </q-card>
@@ -112,18 +131,19 @@
 
         </q-list>
       </div>
-      <div>
-        <div style="height: 500px;">
-          <vue-word-cloud
-            :words="words"
-            :color="coloringFunction"
-            :font-family="fontFamily"
-            :font-size-ration="fontSizeRatio"
-            :enter-animation="animation[0]"
-            :leave-animation="animation[1]"
-            :animation-duration="animationDuration"
-          />
-        </div>
+      <div style="height: 500px;">
+        <vue-word-cloud
+          :words="words"
+          :color="coloringFunction"
+          :font-family="fontFamily"
+          :font-size-ration="fontSizeRatio"
+          :enter-animation="'animated ' + animation[0]"
+          :leave-animation="'animated ' + animation[1]"
+          @update:progress="test"
+          :animation-duration="animationDuration"
+          :rotation="rotation.value"
+          rotation_unit='turn'
+        />
       </div>
     </div>
   </div>
@@ -169,15 +189,31 @@ export default {
       easing: DefaultWordCloudConfig.animations.easings[0],
       colors: DefaultWordCloudConfig.colors.schemes[2],
       randomColoring: false,
+      rotation: DefaultWordCloudConfig.rotations[0],
       available: {
         ...DefaultWordCloudConfig
       }
     }
   },
   methods: {
-    assetFunction (imageName) {
+    getColorAsset (imageName) {
       var colors = require.context('../assets/colors/', false, /\.svg$/)
       return colors(`./${imageName}.svg`)
+    },
+    getRotationAsset (rotationName) {
+      var rotations = require.context('../assets/rotations/', false, /\.svg$/)
+      return rotations(`./${rotationName}.svg`)
+    },
+    test (updateState) {
+      if (updateState === null) {
+        this.$q.loadingBar.stop()
+      } else if (updateState.completedWords === 0) {
+        this.$q.loadingBar.start()
+      } else if (updateState.completedWords === updateState.totalWords) {
+        this.$q.loadingBar.stop()
+      } else {
+        this.$q.loadingBar.increment(updateState.completedWords / updateState.totalWords)
+      }
     }
   },
   computed: {
