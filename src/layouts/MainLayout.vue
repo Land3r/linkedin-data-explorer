@@ -47,7 +47,7 @@
         />
         <q-separator />
         <navigation-menu-link
-          v-for="link in getActiveViews"
+          v-for="link in getActiveViewsDetails"
           :key="link.title"
           v-bind="link"
         />
@@ -64,6 +64,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import NavigationMenuLink from 'components/navigation/NavigationMenuLink'
+import { LinkedinTypesDetails } from '../data/linkedin'
 
 export default {
   name: 'MainLayout',
@@ -78,7 +79,15 @@ export default {
   computed: {
     ...mapGetters('linkedin', [
       'getActiveViews'
-    ])
+    ]),
+    getActiveViewsDetails () {
+      return this.getActiveViews.map((element) => ({
+        title: LinkedinTypesDetails.find((elm) => elm.id === element.id).name,
+        caption: '',
+        icon: LinkedinTypesDetails.find((elm) => elm.id === element.id).icon,
+        link: LinkedinTypesDetails.find((elm) => elm.id === element.id).page
+      }))
+    }
   }
 }
 </script>

@@ -15,7 +15,11 @@ export const mutations = {
     state.messages = [...messages]
   },
   [types.SET_PROFILE] (state, profile) {
-    state.profile = { ...profile }
+    if (profile === null) {
+      state.profile = null
+    } else {
+      state.profile = { ...profile }
+    }
   },
   [types.SET_RECOMMENDATIONS_GIVEN] (state, recommendations) {
     state.recommendationsgiven = [...recommendations]

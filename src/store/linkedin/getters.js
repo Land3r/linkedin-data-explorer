@@ -1,3 +1,5 @@
+import { LinkedinTypes } from '../../data/linkedin'
+
 export function getConnections (state) {
   return state.connections
 }
@@ -35,66 +37,42 @@ export function getActiveViews (state) {
 
   if (state.connections.length > 0) {
     activeViews.push({
-      title: 'Connections',
-      caption: '',
-      icon: 'transfer_within_a_station',
-      link: 'ConnectionsPage'
+      id: LinkedinTypes.connections
     })
   }
   if (state.contacts.length > 0) {
     activeViews.push({
-      title: 'Contacts',
-      caption: '',
-      icon: 'contacts',
-      link: 'ContactsPage'
+      id: LinkedinTypes.contacts
     })
   }
   if (state.invitations.length > 0) {
     activeViews.push({
-      title: 'Invitations',
-      caption: '',
-      icon: 'mail_outline',
-      link: 'InvitationsPage'
+      id: LinkedinTypes.invitations
     })
   }
   if (state.messages.length > 0) {
     activeViews.push({
-      title: 'Messages',
-      caption: '',
-      icon: 'message',
-      link: 'MessagesPage'
+      id: LinkedinTypes.messages
     })
   }
   if (state.profile !== null) {
     activeViews.push({
-      title: 'Profile',
-      caption: '',
-      icon: 'perm_identity',
-      link: 'ProfilePage'
+      id: LinkedinTypes.profile
     })
   }
   if (state.recommendationsgiven.length > 0) {
     activeViews.push({
-      title: 'Recommendations Given',
-      caption: '',
-      icon: 'message',
-      link: 'RecommendationsGivenPage'
+      id: LinkedinTypes.recommendationsGiven
     })
   }
   if (state.recommendationsreceived.length > 0) {
     activeViews.push({
-      title: 'Recommendations Received',
-      caption: '',
-      icon: 'message',
-      link: 'RecommendationsReceivedPage'
+      id: LinkedinTypes.recommendationsReceived
     })
   }
   if (state.registrations.length > 0) {
     activeViews.push({
-      title: 'Registrations',
-      caption: '',
-      icon: '',
-      link: 'RegistrationsPage'
+      id: LinkedinTypes.registrations
     })
   }
 

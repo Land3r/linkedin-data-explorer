@@ -69,8 +69,10 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import * as LinkedinActionsTypes from '../store/linkedin/actions-types'
+
 import NavigationBar from 'components/navigation/NavigationBar'
-import { LinkedinTypes } from '../data/linkedin'
+import { LinkedinTypes, LinkedinTypesDetails } from '../data/linkedin'
 
 export default {
   name: 'DataOverviewPage',
@@ -91,15 +93,39 @@ export default {
     }
   },
   methods: {
-    onDeleteBtnClick (id, name) {
+    ...mapActions('linkedin', [
+      LinkedinActionsTypes.RESET_CONNECTIONS,
+      LinkedinActionsTypes.RESET_CONTACTS,
+      LinkedinActionsTypes.RESET_INVITATIONS,
+      LinkedinActionsTypes.RESET_MESSAGES,
+      LinkedinActionsTypes.RESET_PROFILE,
+      LinkedinActionsTypes.RESET_RECOMMENDATIONS_GIVEN,
+      LinkedinActionsTypes.RESET_RECOMMENDATIONS_RECEIVED,
+      LinkedinActionsTypes.RESET_REGISTRATIONS
+    ]),
+    onDeleteBtnClick (id) {
       this.$q.dialog({
         title: 'Confirm',
-        message: `Are you sure you want to delete ${name}`,
+        message: `Are you sure you want to delete ${LinkedinTypesDetails.find(elm => elm.id === id).name}`,
         cancel: true,
         persistent: true
       }).onOk(() => {
         if (id === LinkedinTypes.connections) {
-          this.
+          this[LinkedinActionsTypes.RESET_CONNECTIONS]()
+        } else if (id === LinkedinTypes.contacts) {
+          this[LinkedinActionsTypes.RESET_CONTACTS]()
+        } else if (id === LinkedinTypes.invitations) {
+          this[LinkedinActionsTypes.RESET_INVITATIONS]()
+        } else if (id === LinkedinTypes.messages) {
+          this[LinkedinActionsTypes.RESET_MESSAGES]()
+        } else if (id === LinkedinTypes.profile) {
+          this[LinkedinActionsTypes.RESET_PROFILE]()
+        } else if (id === LinkedinTypes.recommendationsGiven) {
+          this[LinkedinActionsTypes.RESET_RECOMMENDATIONS_GIVEN]()
+        } else if (id === LinkedinTypes.recommendationsReceived) {
+          this[LinkedinActionsTypes.RESET_RECOMMENDATIONS_RECEIVED]()
+        } else if (id === LinkedinTypes.registrations) {
+          this[LinkedinActionsTypes.RESET_REGISTRATIONS]()
         }
       }).onOk(() => {
         // console.log('>>>> second OK catcher')
@@ -108,8 +134,6 @@ export default {
       }).onDismiss(() => {
         // console.log('I am triggered on both OK and Cancel')
       })
-    },
-
     }
   },
   computed: {
