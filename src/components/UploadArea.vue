@@ -68,6 +68,10 @@
 </style>
 
 <script>
+/**
+ * HTML Drag & drop zone for reading files in browser.
+ * Listen for event 'load' for the uploaded file UTF-8 text.
+ */
 export default {
   name: 'UploadArea',
   data () {

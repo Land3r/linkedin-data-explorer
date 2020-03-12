@@ -133,5 +133,29 @@ export const actions = {
       })
       console.error(err)
     })
+  },
+  [actionstypes.RESET_CONNECTIONS] ({ commit }) {
+    commit(mutationstypes.SET_CONNECTIONS, [])
+  },
+  [actionstypes.RESET_CONTACTS] ({ commit }) {
+    commit(mutationstypes.SET_CONTACTS, [])
+  },
+  [actionstypes.RESET_INVITATIONS] ({ commit }) {
+    commit(mutationstypes.SET_INVITATIONS, [])
+  },
+  [actionstypes.RESET_MESSAGES] ({ commit }) {
+    commit(mutationstypes.SET_MESSAGES, [])
+  },
+  [actionstypes.RESET_PROFILE] ({ commit }) {
+    commit(mutationstypes.SET_PROFILE, null)
+  },
+  [actionstypes.RESET_RECOMMENDATIONS_GIVEN] ({ commit }) {
+    commit(mutationstypes.SET_RECOMMENDATIONS_GIVEN, [])
+  },
+  [actionstypes.RESET_RECOMMENDATIONS_RECEIVED] ({ commit }) {
+    commit(mutationstypes.SET_RECOMMENDATIONS_RECEIVED, [])
+  },
+  [actionstypes.RESET_REGISTRATIONS] ({ commit }) {
+    commit(mutationstypes.SET_REGISTRATIONS, [])
   }
 }

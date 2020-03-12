@@ -32,21 +32,27 @@
             </q-item-section>
 
             <q-item-section middle>
-
-              <q-item-label lines="1" class="q-mt-xs text-body2 text-weight-bold text-primary text-uppercase">
-                <q-item
-                  clickable
-                  tag="a"
-                  class="cursor-pointer inline"
-                  :to="data.to">
-                  View
-                </q-item>
-              </q-item-label>
+              <q-btn
+                color="primary"
+                style="max-width: 200px"
+                :to="data.to"
+                :disable="!(Number.isInteger(data.length) ? data.length > 0 : data.length)"
+              >
+                View
+              </q-btn>
             </q-item-section>
 
             <q-item-section middle side>
               <div class="text-grey-8 q-gutter-xs">
-                <q-btn class="gt-xs" size="12px" flat dense round icon="delete" />
+                <q-btn
+                  flat
+                  dense
+                  round
+                  icon="delete"
+                  color="negative"
+                  :disable="!(Number.isInteger(data.length) ? data.length > 0 : data.length)"
+                  @click="onDeleteBtnClick(data.id, data.name)"
+                />
               </div>
             </q-item-section>
           </q-item>
@@ -62,8 +68,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import NavigationBar from 'components/navigation/NavigationBar'
+import { LinkedinTypes } from '../data/linkedin'
 
 export default {
   name: 'DataOverviewPage',
@@ -81,6 +88,28 @@ export default {
           icon: 'widgets'
         }
       ]
+    }
+  },
+  methods: {
+    onDeleteBtnClick (id, name) {
+      this.$q.dialog({
+        title: 'Confirm',
+        message: `Are you sure you want to delete ${name}`,
+        cancel: true,
+        persistent: true
+      }).onOk(() => {
+        if (id === LinkedinTypes.connections) {
+          this.
+        }
+      }).onOk(() => {
+        // console.log('>>>> second OK catcher')
+      }).onCancel(() => {
+        // console.log('>>>> Cancel')
+      }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+      })
+    },
+
     }
   },
   computed: {

@@ -14,7 +14,7 @@
 <script>
 import NavigationBar from 'components/navigation/NavigationBar'
 import UploadArea from 'components/UploadArea'
-import { LinkedinFileName } from '../data/linkedin-filenames'
+import { LinkedinFileName } from '../data/linkedin'
 
 import { vuexNamespaced } from '../helpers/vuexHelper'
 import * as actionstypes from '../store/linkedin/actions-types'
