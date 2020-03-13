@@ -30,9 +30,9 @@
                     </label>
                     <br />
                     <label>Font Family
-                      <q-select
+                      <font-select
                         label="Font Family"
-                        :options="available.fonts.families"
+                        :fonts="available.fonts.families"
                         v-model="fontFamily"
                       />
                     </label>
@@ -162,9 +162,10 @@
 
 <script>
 import VueWordCloud from 'vuewordcloud'
-import { DefaultWordCloudConfig } from '../data/word-cloud'
 import download from 'downloadjs'
 
+import FontSelect from 'components/form/FontSelect'
+import { DefaultWordCloudConfig } from '../data/word-cloud'
 import { renderNodeToPng } from '../helpers/domHelper'
 
 export default {
@@ -184,7 +185,8 @@ export default {
     }
   },
   components: {
-    'vue-word-cloud': VueWordCloud
+    'vue-word-cloud': VueWordCloud,
+    'font-select': FontSelect
   },
   data () {
     return {
@@ -194,7 +196,7 @@ export default {
       colorScheme: null,
       orientationScheme: null,
       wordsSpacing: 20,
-      fontSizeRatio: 2,
+      fontSizeRatio: 8,
       animation: DefaultWordCloudConfig.animations.animations[0],
       animationDuration: DefaultWordCloudConfig.animations.durations[1],
       easing: DefaultWordCloudConfig.animations.easings[0],
