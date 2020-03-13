@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div class="text-h6">Words</div>
-    <div>
-      <div>
+    <div class="row">
+      <div class="col">
         <q-list bordered class="rounded-borders">
           <q-expansion-item
             switch-toggle-side
@@ -25,8 +24,8 @@
                     <br />
                     <label>Enable Language Cleaning
                       <q-toggle
-                       v-model="cleanLocalized"
-                       icon="verified_user"
+                        v-model="cleanLocalized"
+                        icon="verified_user"
                       />
                     </label>
                     <br />
@@ -131,20 +130,29 @@
 
         </q-list>
       </div>
-      <div style="height: 500px;">
-        <vue-word-cloud
-          :words="words"
-          :color="coloringFunction"
-          :font-family="fontFamily"
-          :font-size-ration="fontSizeRatio"
-          :enter-animation="'animated ' + animation[0]"
-          :leave-animation="'animated ' + animation[1]"
-          @update:progress="test"
-          :animation-duration="animationDuration"
-          :rotation="rotation.value"
-          rotation_unit='turn'
-        />
-      </div>
+      <q-btn
+        icon="fas fa-download"
+        color="primary"
+        outline
+        type="a"
+        class="float-right on-right"
+        @click="onDownloadBtnClick"
+      >
+      </q-btn>
+    </div>
+    <div class="row" style="height: 500px;" ref="wordCloud">
+      <vue-word-cloud
+        :words="words"
+        :color="coloringFunction"
+        :font-family="fontFamily"
+        :font-size-ratio="fontSizeRatio"
+        :enter-animation="'animated ' + animation[0]"
+        :leave-animation="'animated ' + animation[1]"
+        @update:progress="onUpdateProgress"
+        :animation-duration="animationDuration"
+        :rotation="rotation.value"
+        :rotation_unit="'turn'"
+      />
     </div>
   </div>
 </template>
@@ -155,6 +163,9 @@
 <script>
 import VueWordCloud from 'vuewordcloud'
 import { DefaultWordCloudConfig } from '../data/word-cloud'
+import download from 'downloadjs'
+
+import { renderNodeToPng } from '../helpers/domHelper'
 
 export default {
   name: 'WordsCloudContainer',
@@ -204,7 +215,7 @@ export default {
       var rotations = require.context('../assets/rotations/', false, /\.svg$/)
       return rotations(`./${rotationName}.svg`)
     },
-    test (updateState) {
+    onUpdateProgress (updateState) {
       if (updateState === null) {
         this.$q.loadingBar.stop()
       } else if (updateState.completedWords === 0) {
@@ -214,6 +225,15 @@ export default {
       } else {
         this.$q.loadingBar.increment(updateState.completedWords / updateState.totalWords)
       }
+    },
+    onDownloadBtnClick () {
+      renderNodeToPng(this.$refs.wordCloud)
+        .then((image) => {
+          download(image, 'wordcloud.png', 'image/png')
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     }
   },
   computed: {

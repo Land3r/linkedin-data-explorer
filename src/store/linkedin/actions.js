@@ -3,11 +3,11 @@ import * as mutationstypes from './mutations-types'
 
 import { Notify } from 'quasar'
 
-import { convertToJson } from '../../services/CsvToJsonService'
+import { convertCsvToJson } from '../../helpers/convertHelper'
 
 export const actions = {
   async [actionstypes.LOAD_CONNECTIONS] ({ commit }, connections) {
-    const jsonPromise = convertToJson(connections)
+    const jsonPromise = convertCsvToJson(connections)
     jsonPromise.then((json) => {
       commit(mutationstypes.SET_CONNECTIONS, json)
       Notify.create({
@@ -23,7 +23,7 @@ export const actions = {
     })
   },
   [actionstypes.LOAD_CONTACTS] ({ commit }, contacts) {
-    const jsonPromise = convertToJson(contacts)
+    const jsonPromise = convertCsvToJson(contacts)
     jsonPromise.then((json) => {
       commit(mutationstypes.SET_CONTACTS, json)
       Notify.create({
@@ -39,7 +39,7 @@ export const actions = {
     })
   },
   [actionstypes.LOAD_INVITATIONS] ({ commit }, invitations) {
-    const jsonPromise = convertToJson(invitations)
+    const jsonPromise = convertCsvToJson(invitations)
     jsonPromise.then((json) => {
       commit(mutationstypes.SET_INVITATIONS, json)
       Notify.create({
@@ -55,7 +55,7 @@ export const actions = {
     })
   },
   [actionstypes.LOAD_MESSAGES] ({ commit }, messages) {
-    const jsonPromise = convertToJson(messages)
+    const jsonPromise = convertCsvToJson(messages)
     jsonPromise.then((json) => {
       commit(mutationstypes.SET_MESSAGES, json)
       Notify.create({
@@ -71,7 +71,7 @@ export const actions = {
     })
   },
   [actionstypes.LOAD_PROFILE] ({ commit }, profile) {
-    const jsonPromise = convertToJson(profile)
+    const jsonPromise = convertCsvToJson(profile)
     jsonPromise.then((json) => {
       commit(mutationstypes.SET_PROFILE, json)
       Notify.create({
@@ -87,7 +87,7 @@ export const actions = {
     })
   },
   [actionstypes.LOAD_RECOMMENDATIONS_GIVEN] ({ commit }, recommendationsGiven) {
-    const jsonPromise = convertToJson(recommendationsGiven)
+    const jsonPromise = convertCsvToJson(recommendationsGiven)
     jsonPromise.then((json) => {
       commit(mutationstypes.SET_RECOMMENDATIONS_GIVEN, json)
       Notify.create({
@@ -103,7 +103,7 @@ export const actions = {
     })
   },
   [actionstypes.LOAD_RECOMMENDATIONS_RECEIVED] ({ commit }, recommendationsReceived) {
-    const jsonPromise = convertToJson(recommendationsReceived)
+    const jsonPromise = convertCsvToJson(recommendationsReceived)
     jsonPromise.then((json) => {
       commit(mutationstypes.SET_RECOMMENDATIONS_RECEIVED, json)
       Notify.create({
@@ -119,7 +119,7 @@ export const actions = {
     })
   },
   [actionstypes.LOAD_REGISTRATIONS] ({ commit }, registrations) {
-    const jsonPromise = convertToJson(registrations)
+    const jsonPromise = convertCsvToJson(registrations)
     jsonPromise.then((json) => {
       commit(mutationstypes.SET_INVITATIONS, json)
       Notify.create({

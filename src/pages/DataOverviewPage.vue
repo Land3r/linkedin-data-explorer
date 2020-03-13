@@ -9,7 +9,7 @@
           <q-item
            v-bind:key="data.id">
             <q-item-section avatar top>
-              <q-icon :name="data.icon" color="black" size="34px" />
+              <q-icon :name="data.icon" :color="!(Number.isInteger(data.length) ? data.length > 0 : data.length) ? 'grey' : 'black'" size="34px" />
             </q-item-section>
 
             <q-item-section top class="col-2 gt-sm">
@@ -134,6 +134,16 @@ export default {
       }).onDismiss(() => {
         // console.log('I am triggered on both OK and Cancel')
       })
+    },
+    getDataLength (dataType) {
+      return dataType === LinkedinTypes.connections ? this.getConnections.length
+        : dataType === LinkedinTypes.contacts ? this.getContacts.length
+          : dataType === LinkedinTypes.invitations ? this.getInvitations.length
+            : dataType === LinkedinTypes.messages ? this.getMessages.length
+              : dataType === LinkedinTypes.profile ? this.getProfile !== null
+                : dataType === LinkedinTypes.recommendationsGiven ? this.getRecommendationsGiven.length
+                  : dataType === LinkedinTypes.recommendationsReceived ? this.getRecommendationsReceived.length
+                    : dataType === LinkedinTypes.registrations ? this.getRegistrations.length : 0
     }
   },
   computed: {
@@ -148,64 +158,15 @@ export default {
       'getRegistrations'
     ]),
     getDataState () {
-      return [
-        {
-          id: 'connections',
-          label: 'Connections',
-          icon: 'transfer_within_a_station',
-          length: this.getConnections.length,
-          to: { name: 'ConnectionsPage' }
-        },
-        {
-          id: 'contacts',
-          label: 'Contacts',
-          icon: 'contacts',
-          length: this.getContacts.length,
-          to: { name: 'ContactsPage' }
-        },
-        {
-          id: 'invitations',
-          label: 'Invitations',
-          icon: 'mail_outline',
-          length: this.getInvitations.length,
-          to: { name: 'InvitationsPage' }
-        },
-        {
-          id: 'messages',
-          label: 'Messages',
-          icon: 'message',
-          length: this.getMessages.length,
-          to: { name: 'MessagesPage' }
-        },
-        {
-          id: 'profile',
-          label: 'Profile',
-          icon: 'perm_identity',
-          length: this.getProfile !== null,
-          to: { name: 'ProfilePage' }
-        },
-        {
-          id: 'recommendationsgiven',
-          label: 'Recommendations Given',
-          icon: 'message',
-          length: this.getRecommendationsGiven.length,
-          to: { name: 'RecommendationsGivenPage' }
-        },
-        {
-          id: 'recommendationsreceived',
-          label: 'Recommendations Received',
-          icon: 'message',
-          length: this.getRecommendationsReceived.length,
-          to: { name: 'RecommendationsReceivedPage' }
-        },
-        {
-          id: 'registrations',
-          label: 'Registrations',
-          icon: null,
-          length: this.getRegistrations.length,
-          to: { name: 'RegistrationsPage' }
-        }
-      ]
+      const linkedinState = LinkedinTypesDetails.map((element) => ({
+        id: element.id,
+        label: LinkedinTypesDetails.find((elm) => elm.id === element.id).name,
+        length: this.getDataLength(element.id),
+        icon: LinkedinTypesDetails.find((elm) => elm.id === element.id).icon,
+        to: { name: LinkedinTypesDetails.find((elm) => elm.id === element.id).page }
+      }))
+      console.dir(linkedinState)
+      return linkedinState
     }
   }
 }

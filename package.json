@@ -16,6 +16,8 @@
     "axios": "^0.18.1",
     "chance": "^1.1.4",
     "csvtojson": "^2.0.10",
+    "downloadjs": "^1.4.7",
+    "html-to-image": "^0.1.1",
     "quasar": "^1.0.0",
     "vuewordcloud": "^18.7.11"
   },

@@ -33,49 +33,49 @@ export const LinkedinTypesDetails = [
   {
     id: LinkedinTypes.connections,
     name: 'Connections',
-    icon: 'transfer_within_a_station',
+    icon: 'fas fa-users',
     page: 'ConnectionsPage'
   },
   {
     id: LinkedinTypes.contacts,
     name: 'Contacts',
-    icon: 'contact',
+    icon: 'far fa-address-book',
     page: 'ContactsPage'
   },
   {
     id: LinkedinTypes.invitations,
     name: 'Invitations',
-    icon: 'mail_outline',
+    icon: 'fas fa-envelope-open-text',
     page: 'InvitationsPage'
   },
   {
     id: LinkedinTypes.messages,
     name: 'Messages',
-    icon: 'message',
+    icon: 'far fa-comments',
     page: 'MessagesPage'
   },
   {
     id: LinkedinTypes.profile,
     name: 'Profile',
-    icon: 'perm_identity',
+    icon: 'far fa-id-card',
     page: 'ProfilePage'
   },
   {
     id: LinkedinTypes.recommendationsGiven,
     name: 'Recommentations Given',
-    icon: 'message',
+    icon: 'far fa-caret-square-up',
     page: 'RecommendationsGivenPage'
   },
   {
     id: LinkedinTypes.recommendationsReceived,
     name: 'Recommendations Received',
-    icon: 'message',
+    icon: 'far fa-caret-square-down',
     page: 'RecommendationsReceivedPage'
   },
   {
     id: LinkedinTypes.registrations,
     name: 'Registrations',
-    icon: '',
+    icon: 'fas fa-graduation-cap',
     page: 'RegistrationsPage'
   }
 ]

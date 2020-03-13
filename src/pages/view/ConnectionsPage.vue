@@ -63,6 +63,7 @@ import { mapGetters } from 'vuex'
 import WordsCloudContainer from 'components/WordsCloudContainer'
 import NavigationBar from 'components/navigation/NavigationBar'
 import StringAnalysisService from '../../services/StringAnalysisService'
+import { LinkedinTypesDetails, LinkedinTypes } from '../../data/linkedin'
 
 export default {
   name: 'ConnectionsPage',
@@ -82,8 +83,8 @@ export default {
           to: { name: 'DataOverviewPage' }
         },
         {
-          label: 'Connections',
-          icon: 'transfer_within_a_station'
+          label: LinkedinTypesDetails.find((elm) => elm.id === LinkedinTypes.connections).name,
+          icon: LinkedinTypesDetails.find((elm) => elm.id === LinkedinTypes.connections).icon
         }
       ],
       activeTab: 'raw',
