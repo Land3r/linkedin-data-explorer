@@ -36,8 +36,7 @@
           </q-tab-panel>
 
           <q-tab-panel name="charts">
-            <div class="text-h6">Alarms</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <donut-chart :data="wordsFirstNameStatistics"/>
           </q-tab-panel>
 
           <q-tab-panel name="words">
@@ -59,16 +58,21 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { format } from 'quasar'
+const { capitalize } = format
 
 import WordsCloudContainer from 'components/WordsCloudContainer'
+import DonutChart from 'components/charts/DonutChart'
 import NavigationBar from 'components/navigation/NavigationBar'
 import StringAnalysisService from '../../services/StringAnalysisService'
+import { repeatToLength } from '../../helpers/arrayHelper'
 import { LinkedinTypesDetails, LinkedinTypes } from '../../data/linkedin'
 
 export default {
   name: 'ConnectionsPage',
   components: {
     'navigation-bar': NavigationBar,
+    'donut-chart': DonutChart,
     'words-cloud-container': WordsCloudContainer
   },
   data () {
@@ -151,6 +155,27 @@ export default {
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const result = stringAnalysisService.analyze(this.wordscloud.maxWords, this.wordscloud.cleanLocalized)
+      return result
+    },
+    wordsFirstNameStatistics () {
+      const strings = this.getConnections.map((element) => { return element['First Name'] }).join(' ')
+      const stringAnalysisService = new StringAnalysisService()
+      stringAnalysisService.load(strings)
+      const analysis = stringAnalysisService.analyze(0, false)
+      const data = analysis.map((element) => element[1])
+      const labels = analysis.map((element) => capitalize(element[0]))
+
+      const colors = ['#52D726', '#FFEC00', '#FF7300', '#FF0000', '#007ED6', '#7CDDDD']
+      const backgroundColor = repeatToLength(colors, data.length)
+
+      const result = {
+        datasets: [{
+          data: data,
+          backgroundColor: backgroundColor
+        }],
+        labels: labels
+      }
+      console.dir(JSON.stringify(result))
       return result
     }
   },

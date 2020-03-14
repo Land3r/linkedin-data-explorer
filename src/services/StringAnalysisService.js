@@ -1,10 +1,34 @@
+/**
+ * StringAnalysisService class.
+ * Responsible for analysing a provided string
+ */
 export default class StringAnalysisService {
+  /**
+   * The input string to analyze.
+   */
   input = ''
 
+  /**
+   * Initializes a new instance of the StringAnalysisService class.
+   * @param {string} input The input string to analyze.
+   */
+  constructor (input = '') {
+    this.input = this.sanitize(input)
+  }
+
+  /**
+   * Loads in the string to analyze.
+   * @param {string} input The input string to analyze.
+   */
   load (input) {
     this.input = this.sanitize(input)
   }
 
+  /**
+   * Analyzes the provided string.
+   * @param {number} maxWords The number of words to get.
+   * @param {boolean} sanitizeLocales Whether to remove common locales string from input or not.
+   */
   analyze (maxWords = 100, sanitizeLocales = true) {
     let allWords = ''
     if (sanitizeLocales) {
@@ -34,13 +58,14 @@ export default class StringAnalysisService {
         return [element.word, element.weight]
       })
 
-    sortedWords = sortedWords.splice(0, maxWords)
+    if (maxWords > 0) {
+      sortedWords = sortedWords.splice(0, maxWords)
+    }
 
     return sortedWords
   }
 
   sanitize (input) {
-    console.log(input)
     const output = input
       .replace(/\./gm, ' ')
       .replace(/,/gm, ' ')
@@ -66,7 +91,6 @@ export default class StringAnalysisService {
       .replace(/@/gm, ' ')
       .replace(/\//gm, ' ')
       .replace(/ {2,}/gm, ' ')
-    console.log(output)
     return output
   }
 
