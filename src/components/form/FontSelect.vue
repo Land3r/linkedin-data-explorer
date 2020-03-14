@@ -1,9 +1,21 @@
 <template>
   <q-select
     :name="name"
+    ref="fontSelect"
     :label="label"
     :options="fonts"
-    :v-model="v-model">
+    :value="value"
+    @input="updateModel($event)">
+
+    <template v-slot:selected>
+      <q-item>
+        <q-item-section>
+          <q-item-label v-html="value"
+          :style="'font-family: ' + value"/>
+        </q-item-section>
+      </q-item>
+    </template>
+
     <template v-slot:option="scope">
       <q-item
         v-bind="scope.itemProps"
@@ -12,7 +24,6 @@
         <q-item-section>
           <q-item-label v-html="scope.opt"
           :style="'font-family: ' + scope.opt"/>
-          <q-item-label caption>{{ scope.opt.description }}</q-item-label>
         </q-item-section>
       </q-item>
     </template>
@@ -29,8 +40,8 @@ export default {
       type: Array,
       required: true
     },
-    'v-model': {
-      type: Object,
+    value: {
+      type: [Object, String],
       required: true
     },
     name: {
@@ -54,6 +65,11 @@ export default {
         families: [...this.fonts.map((font) => (`${font}:n4`))]
       }
     })
+  },
+  methods: {
+    updateModel (newValue) {
+      this.$emit('input', newValue)
+    }
   }
 }
 </script>
