@@ -56,6 +56,8 @@ import WordsCloudContainer from 'components/containers/WordsCloudContainer'
 import NavigationBar from 'components/navigation/NavigationBar'
 import StringAnalysisService from 'services/StringAnalysisService'
 import { repeatToLength } from 'helpers/arrayHelper'
+import { convertJsonArrayToString } from 'helpers/stringHelper'
+import { DefaultDonut } from 'data/chart'
 import { LinkedinTypesDetails, LinkedinTypes, LinkedinContactsColumns } from 'data/linkedin'
 
 export default {
@@ -89,45 +91,60 @@ export default {
       },
       columns: [
         {
+          name: 'source',
+          label: 'Source',
+          align: 'left',
+          field: LinkedinContactsColumns.source,
+          sortable: true
+          // format: 'TODO'
+        },
+        {
           name: 'firstname',
           label: 'Firstname',
-          align: 'left',
-          field: LinkedinConnectionsColumns.firstName,
+          align: 'center',
+          field: LinkedinContactsColumns.firstName,
           sortable: true
         },
         {
           name: 'lastname',
-          align: 'center',
           label: 'Lastname',
-          field: LinkedinConnectionsColumns.lastName,
+          align: 'center',
+          field: LinkedinContactsColumns.lastName,
           sortable: true
         },
         {
-          name: 'email',
+          name: 'companies',
+          label: 'Companies',
           align: 'center',
-          label: 'Email',
-          field: LinkedinConnectionsColumns.emailAddress,
+          field: LinkedinContactsColumns.companies,
           sortable: true
         },
         {
-          name: 'company',
-          align: 'center',
-          label: 'Company',
-          field: LinkedinConnectionsColumns.company,
-          sortable: true
-        },
-        {
-          name: 'position',
-          align: 'center',
+          name: 'title',
           label: 'Position',
-          field: LinkedinConnectionsColumns.position,
+          align: 'center',
+          field: LinkedinContactsColumns.title,
           sortable: true
         },
         {
-          name: 'connectedon',
+          name: 'emails',
+          label: 'Emails',
           align: 'center',
-          label: 'Connected On',
-          field: LinkedinConnectionsColumns.connectedOn,
+          field: LinkedinContactsColumns.emails,
+          sortable: true
+        },
+        {
+          name: 'phonenumbers',
+          label: 'Phone Numbers',
+          align: 'center',
+          field: LinkedinContactsColumns.phoneNumbers,
+          sortable: true
+        },
+        {
+          name: 'createdAt',
+          label: 'Created',
+          align: 'center',
+          field: LinkedinContactsColumns.createdAt,
           sortable: true
         }
       ]
@@ -140,26 +157,27 @@ export default {
     wordsWithWeight () {
       const strings = convertJsonArrayToString(this.getContacts, [
         LinkedinContactsColumns.firstName,
-        LinkedinConnectionsColumns.lastName,
-        LinkedinConnectionsColumns.emails,
-        LinkedinConnectionsColumns.phoneNumbers
+        LinkedinContactsColumns.lastName,
+        LinkedinContactsColumns.emails,
+        LinkedinContactsColumns.phoneNumbers
       ])
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const result = stringAnalysisService.analyze(this.wordscloud.maxWords, this.wordscloud.cleanLocalized)
       return result
     },
-    wordsFirstNameStatistics () {
-      const strings = this.getContacts.map((element) => { return element[LinkedinContactsColumns.firstName] }).join(' ')
+    wordsSourceStatistics () {
+      const strings = this.getContacts.map((element) => { return element[LinkedinContactsColumns.source] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(0, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
+
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
-      const colors = ['#52D726', '#FFEC00', '#FF7300', '#FF0000', '#007ED6', '#7CDDDD']
+      const backgroundColor = repeatToLength(DefaultDonut.colors, data.length)
+      const hoverBackgroundColor = repeatToLength(DefaultDonut.hoverColors, data.length)
 
-      const backgroundColor = repeatToLength(colors, data.length)
-      const hoverBackgroundColor = repeatToLength(colors, data.length)
+      // TODO: Voir pour mettre des labels parlants.
 
       const result = {
         datasets: [{
@@ -169,76 +187,63 @@ export default {
         }],
         labels: labels
       }
-      console.dir(JSON.stringify(result))
+      return result
+    },
+    wordsFirstNameStatistics () {
+      const strings = this.getContacts.map((element) => { return element[LinkedinContactsColumns.firstName] }).join(' ')
+      const stringAnalysisService = new StringAnalysisService()
+      stringAnalysisService.load(strings)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
+
+      const data = analysis.map((element) => element[1])
+      const labels = analysis.map((element) => capitalize(element[0]))
+      const backgroundColor = repeatToLength(DefaultDonut.colors, data.length)
+      const hoverBackgroundColor = repeatToLength(DefaultDonut.hoverColors, data.length)
+
+      const result = {
+        datasets: [{
+          data: data,
+          backgroundColor: backgroundColor,
+          hoverBackgroundColor: hoverBackgroundColor
+        }],
+        labels: labels
+      }
       return result
     },
     wordsLastNameStatistics () {
-      const strings = this.getContacts.map((element) => { return element[LinkedinMessagesColumns.lastName] }).join(' ')
+      const strings = this.getContacts.map((element) => { return element[LinkedinContactsColumns.lastName] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(0, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
+
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
-
-      const colors = ['#52D726', '#FFEC00', '#FF7300', '#FF0000', '#007ED6', '#7CDDDD']
-      const backgroundColor = repeatToLength(colors, data.length)
+      const backgroundColor = repeatToLength(DefaultDonut.colors, data.length)
+      const hoverBackgroundColor = repeatToLength(DefaultDonut.hoverColors, data.length)
 
       const result = {
         datasets: [{
           data: data,
-          backgroundColor: backgroundColor
+          backgroundColor: backgroundColor,
+          hoverBackgroundColor: hoverBackgroundColor
         }],
-        labels: labels,
-        options: {
-          title: {
-            display: true,
-            text: 'Custom Chart Title'
-          }
-        }
+        labels: labels
       }
-      console.dir(JSON.stringify(result))
-      return result
-    },
-    wordsDirectionStatistics () {
-      const strings = this.getContacts.map((element) => { return element[LinkedinMessagesColumns.direction] }).join(' ')
-      const stringAnalysisService = new StringAnalysisService()
-      stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(0, false)
-      const data = analysis.map((element) => element[1])
-      const labels = analysis.map((element) => capitalize(element[0]))
-
-      const colors = ['#52D726', '#FFEC00', '#FF7300', '#FF0000', '#007ED6', '#7CDDDD']
-      const backgroundColor = repeatToLength(colors, data.length)
-
-      const result = {
-        datasets: [{
-          data: data,
-          backgroundColor: backgroundColor
-        }],
-        labels: labels,
-        options: {
-          title: {
-            display: true,
-            text: 'Custom Chart Title'
-          }
-        }
-      }
-      console.dir(JSON.stringify(result))
       return result
     },
     getChartsData () {
       return [
         {
-          name: 'Subject',
-          data: this.wordsSubjectStatistics
+          name: 'Source',
+          data: this.wordsSourceStatistics
         },
         {
-          name: 'Content',
-          data: this.wordsContentStatistics
+          name: 'FirstName',
+          data: this.wordsFirstNameStatistics
         },
         {
-          name: 'Direction',
-          data: this.wordsDirectionStatistics
+          name: 'Last Name',
+          data: this.wordsLastNameStatistics
         }
       ]
     }

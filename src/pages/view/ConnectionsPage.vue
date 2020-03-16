@@ -156,7 +156,7 @@ export default {
       const strings = this.getConnections.map((element) => { return element[LinkedinConnectionsColumns.firstName] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(0, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
 
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
@@ -177,7 +177,7 @@ export default {
       const strings = this.getConnections.map((element) => { return element[LinkedinConnectionsColumns.lastName] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(0, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
 
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
@@ -198,7 +198,7 @@ export default {
       const strings = this.getConnections.map((element) => { return element[LinkedinConnectionsColumns.company] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(0, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
 
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
@@ -219,7 +219,7 @@ export default {
       const strings = this.getConnections.map((element) => { return element[LinkedinConnectionsColumns.position] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(0, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
 
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
