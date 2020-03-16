@@ -21,7 +21,11 @@
 
         <q-tab-panels v-model="activeTab" animated>
           <q-tab-panel name="raw">
-            <table-container :data="getRegistrations" :columns="columns"/>
+            <table-container
+              title="Registrations"
+              :data="getRegistrations"
+              :columns="columns"
+            />
           </q-tab-panel>
 
           <q-tab-panel name="charts">

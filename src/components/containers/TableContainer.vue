@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-table
-      title="Connections"
+      :title="title"
       :data="data"
       :columns="columns"
       row-key="Row"
@@ -18,6 +18,10 @@
 export default {
   name: 'TableContainer',
   props: {
+    title: {
+      type: String,
+      required: true
+    },
     data: {
       type: Array,
       required: true

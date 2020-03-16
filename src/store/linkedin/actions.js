@@ -73,7 +73,7 @@ export const actions = {
   [actionstypes.LOAD_PROFILE] ({ commit }, profile) {
     const jsonPromise = convertCsvToJson(profile)
     jsonPromise.then((json) => {
-      commit(mutationstypes.SET_PROFILE, json)
+      commit(mutationstypes.SET_PROFILE, json[0])
       Notify.create({
         type: 'positive',
         message: 'Profile imported.'
@@ -121,7 +121,7 @@ export const actions = {
   [actionstypes.LOAD_REGISTRATIONS] ({ commit }, registrations) {
     const jsonPromise = convertCsvToJson(registrations)
     jsonPromise.then((json) => {
-      commit(mutationstypes.SET_INVITATIONS, json)
+      commit(mutationstypes.SET_REGISTRATIONS, json)
       Notify.create({
         type: 'positive',
         message: 'Registrations imported.'

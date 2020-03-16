@@ -21,11 +21,17 @@
 
         <q-tab-panels v-model="activeTab" animated>
           <q-tab-panel name="raw">
-            <table-container :data="getConnections" :columns="columns"/>
+            <table-container
+              title="Connections"
+              :data="getConnections"
+              :columns="columns"
+            />
           </q-tab-panel>
 
           <q-tab-panel name="charts">
-            <charts-container :data="getChartsData" />
+            <charts-container
+              :data="getChartsData"
+            />
           </q-tab-panel>
 
           <q-tab-panel name="words">

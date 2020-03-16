@@ -21,7 +21,11 @@
 
         <q-tab-panels v-model="activeTab" animated>
           <q-tab-panel name="raw">
-            <table-container :data="getRecommendationsReceived" :columns="columns"/>
+            <table-container
+              title="Recommendations Received"
+              :data="getRecommendationsReceived"
+              :columns="columns"
+            />
           </q-tab-panel>
 
           <q-tab-panel name="charts">
@@ -137,7 +141,7 @@ export default {
   },
   computed: {
     ...mapGetters('linkedin', [
-      'getRecommendationsReceivedPage'
+      'getRecommendationsReceived'
     ]),
     wordsWithWeight () {
       const strings = convertJsonArrayToString(this.getRecommendationsReceived, [

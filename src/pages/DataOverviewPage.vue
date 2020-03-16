@@ -165,7 +165,6 @@ export default {
         icon: LinkedinTypesDetails.find((elm) => elm.id === element.id).icon,
         to: { name: LinkedinTypesDetails.find((elm) => elm.id === element.id).page }
       }))
-      console.dir(linkedinState)
       return linkedinState
     }
   }

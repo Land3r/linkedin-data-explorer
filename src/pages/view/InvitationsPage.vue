@@ -21,7 +21,11 @@
 
         <q-tab-panels v-model="activeTab" animated>
           <q-tab-panel name="raw">
-            <table-container :data="getInvitations" :columns="columns"/>
+            <table-container
+              title="Invitations"
+              :data="getInvitations"
+              :columns="columns"
+            />
           </q-tab-panel>
 
           <q-tab-panel name="charts">
@@ -133,12 +137,14 @@ export default {
       'getInvitations'
     ]),
     wordsWithWeight () {
+      console.log(this.getInvitations)
       const strings = convertJsonArrayToString(this.getInvitations, [
         LinkedinInvitationsColumns.from,
         LinkedinInvitationsColumns.to,
         LinkedinInvitationsColumns.message,
         LinkedinInvitationsColumns.direction
       ])
+      console.log(strings)
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const result = stringAnalysisService.analyze(this.wordscloud.maxWords, this.wordscloud.cleanLocalized)

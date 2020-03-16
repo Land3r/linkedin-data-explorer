@@ -21,7 +21,11 @@
 
         <q-tab-panels v-model="activeTab" animated>
           <q-tab-panel name="raw">
-            <table-container :data="getMessages" :columns="columns"/>
+            <table-container
+              title="Messages"
+              :data="getMessages"
+              :columns="columns"
+            />
           </q-tab-panel>
 
           <q-tab-panel name="charts">
@@ -153,7 +157,8 @@ export default {
       return result
     },
     wordsDirectionStatistics () {
-      const strings = this.getInvitations.map((element) => { return element[LinkedinMessagesColumns.direction] }).join(' ')
+      const strings = this.getMessages.map((element) => { return element[LinkedinMessagesColumns.direction] }).join(' ')
+
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
@@ -174,7 +179,7 @@ export default {
       return result
     },
     wordsFromStatistics () {
-      const strings = this.getInvitations.map((element) => { return element[LinkedinMessagesColumns.from] }).join(' ')
+      const strings = this.getMessages.map((element) => { return element[LinkedinMessagesColumns.from] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
@@ -195,7 +200,7 @@ export default {
       return result
     },
     wordsToStatistics () {
-      const strings = this.getInvitations.map((element) => { return element[LinkedinMessagesColumns.to] }).join(' ')
+      const strings = this.getMessages.map((element) => { return element[LinkedinMessagesColumns.to] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
@@ -216,7 +221,7 @@ export default {
       return result
     },
     wordsSubjectStatistics () {
-      const strings = this.getInvitations.map((element) => { return element[LinkedinMessagesColumns.subject] }).join(' ')
+      const strings = this.getMessages.map((element) => { return element[LinkedinMessagesColumns.subject] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
@@ -237,7 +242,7 @@ export default {
       return result
     },
     wordsContentStatistics () {
-      const strings = this.getInvitations.map((element) => { return element[LinkedinMessagesColumns.content] }).join(' ')
+      const strings = this.getMessages.map((element) => { return element[LinkedinMessagesColumns.content] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)

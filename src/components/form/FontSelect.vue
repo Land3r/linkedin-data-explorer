@@ -58,7 +58,6 @@ export default {
     }
   },
   created () {
-    console.dir([...this.fonts.map((font) => (`${font}:n4`))])
     // Load the initial font provided
     WebFontLoader.load({
       google: {

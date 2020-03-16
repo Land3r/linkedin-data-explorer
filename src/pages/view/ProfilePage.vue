@@ -49,7 +49,7 @@ import { mapGetters } from 'vuex'
 import WordsCloudContainer from 'components/containers/WordsCloudContainer'
 import NavigationBar from 'components/navigation/NavigationBar'
 import StringAnalysisService from 'services/StringAnalysisService'
-import { convertJsonArrayToString } from 'helpers/stringHelper'
+import { convertJsonToString } from 'helpers/stringHelper'
 import { LinkedinTypesDetails, LinkedinTypes, LinkedinProfileColumns } from 'data/linkedin'
 
 export default {
@@ -86,8 +86,20 @@ export default {
       'getProfile'
     ]),
     wordsWithWeight () {
-      const strings = convertJsonArrayToString(this.getProfile, [
-        ...LinkedinProfileColumns
+      const strings = convertJsonToString(this.getProfile, [
+        LinkedinProfileColumns.firstName,
+        LinkedinProfileColumns.lastName,
+        LinkedinProfileColumns.maidenName,
+        LinkedinProfileColumns.address,
+        LinkedinProfileColumns.birthDate,
+        LinkedinProfileColumns.headline,
+        LinkedinProfileColumns.summary,
+        LinkedinProfileColumns.industry,
+        LinkedinProfileColumns.zipCode,
+        LinkedinProfileColumns.geoLocation,
+        LinkedinProfileColumns.twitterHandles,
+        LinkedinProfileColumns.websites,
+        LinkedinProfileColumns.instantMessengers
       ])
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)

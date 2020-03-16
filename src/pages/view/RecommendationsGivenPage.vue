@@ -21,7 +21,11 @@
 
         <q-tab-panels v-model="activeTab" animated>
           <q-tab-panel name="raw">
-            <table-container :data="getRecommendationsGiven" :columns="columns"/>
+            <table-container
+              title="Recommendations Given"
+              :data="getRecommendationsGiven"
+              :columns="columns"
+            />
           </q-tab-panel>
 
           <q-tab-panel name="charts">
