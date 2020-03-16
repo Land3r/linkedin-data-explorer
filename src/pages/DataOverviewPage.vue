@@ -69,10 +69,10 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import * as LinkedinActionsTypes from '../store/linkedin/actions-types'
+import * as LinkedinActionsTypes from 'store/linkedin/actions-types'
 
 import NavigationBar from 'components/navigation/NavigationBar'
-import { LinkedinTypes, LinkedinTypesDetails } from '../data/linkedin'
+import { LinkedinTypes, LinkedinTypesDetails } from 'data/linkedin'
 
 export default {
   name: 'DataOverviewPage',

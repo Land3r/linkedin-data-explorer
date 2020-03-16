@@ -21,22 +21,11 @@
 
         <q-tab-panels v-model="activeTab" animated>
           <q-tab-panel name="raw">
-            <div class="q-pa-md">
-              <q-table
-                title="Connections"
-                :data="getConnections"
-                :columns="columns"
-                row-key="Row"
-                :selected-rows-label="getSelectedString"
-                selection="multiple"
-                :pagination.sync="pagination"
-                :selected.sync="selected"
-              />
-            </div>
+            <table-container :data="getConnections" :columns="columns"/>
           </q-tab-panel>
 
           <q-tab-panel name="charts">
-            <donut-chart :data="wordsFirstNameStatistics"/>
+            <charts-container :data="getChartsData" />
           </q-tab-panel>
 
           <q-tab-panel name="words">
@@ -61,18 +50,22 @@ import { mapGetters } from 'vuex'
 import { format } from 'quasar'
 const { capitalize } = format
 
-import WordsCloudContainer from 'components/WordsCloudContainer'
-import DonutChart from 'components/charts/DonutChart'
+import TableContainer from 'components/containers/TableContainer'
+import ChartsContainer from 'components/containers/ChartsContainer'
+import WordsCloudContainer from 'components/containers/WordsCloudContainer'
 import NavigationBar from 'components/navigation/NavigationBar'
-import StringAnalysisService from '../../services/StringAnalysisService'
-import { repeatToLength } from '../../helpers/arrayHelper'
-import { LinkedinTypesDetails, LinkedinTypes } from '../../data/linkedin'
+import StringAnalysisService from 'services/StringAnalysisService'
+import { repeatToLength } from 'helpers/arrayHelper'
+import { convertJsonArrayToString } from 'helpers/stringHelper'
+import { DefaultDonut } from 'data/chart'
+import { LinkedinTypesDetails, LinkedinTypes, LinkedinConnectionsColumns } from 'data/linkedin'
 
 export default {
   name: 'ConnectionsPage',
   components: {
     'navigation-bar': NavigationBar,
-    'donut-chart': DonutChart,
+    'table-container': TableContainer,
+    'charts-container': ChartsContainer,
     'words-cloud-container': WordsCloudContainer
   },
   data () {
@@ -92,9 +85,6 @@ export default {
         }
       ],
       activeTab: 'raw',
-      pagination: {
-        rowsPerPage: 50
-      },
       wordscloud: {
         maxWords: 100,
         cleanLocalized: true
@@ -104,46 +94,45 @@ export default {
           name: 'firstname',
           label: 'Firstname',
           align: 'left',
-          field: 'First Name',
+          field: LinkedinConnectionsColumns.firstName,
           sortable: true
         },
         {
           name: 'lastname',
           align: 'center',
           label: 'Lastname',
-          field: 'Last Name',
+          field: LinkedinConnectionsColumns.lastName,
           sortable: true
         },
         {
           name: 'email',
           align: 'center',
           label: 'Email',
-          field: 'Email Address',
+          field: LinkedinConnectionsColumns.emailAddress,
           sortable: true
         },
         {
           name: 'company',
           align: 'center',
           label: 'Company',
-          field: 'Company',
+          field: LinkedinConnectionsColumns.company,
           sortable: true
         },
         {
           name: 'position',
           align: 'center',
           label: 'Position',
-          field: 'Position',
+          field: LinkedinConnectionsColumns.position,
           sortable: true
         },
         {
           name: 'connectedon',
           align: 'center',
           label: 'Connected On',
-          field: 'Connected On',
+          field: LinkedinConnectionsColumns.connectedOn,
           sortable: true
         }
-      ],
-      selected: []
+      ]
     }
   },
   computed: {
@@ -151,38 +140,124 @@ export default {
       'getConnections'
     ]),
     wordsWithWeight () {
-      const strings = this.getConnections.map((element) => { return element['First Name'] + ' ' + element['Last Name'] + ' ' + element['Email Address'] + ' ' + element.Company + ' ' + element.Position }).join(' ')
+      const strings = convertJsonArrayToString(this.getConnections, [
+        LinkedinConnectionsColumns.firstName,
+        LinkedinConnectionsColumns.lastName,
+        LinkedinConnectionsColumns.emailAddress,
+        LinkedinConnectionsColumns.company,
+        LinkedinConnectionsColumns.position
+      ])
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const result = stringAnalysisService.analyze(this.wordscloud.maxWords, this.wordscloud.cleanLocalized)
       return result
     },
     wordsFirstNameStatistics () {
-      const strings = this.getConnections.map((element) => { return element['First Name'] }).join(' ')
+      const strings = this.getConnections.map((element) => { return element[LinkedinConnectionsColumns.firstName] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const analysis = stringAnalysisService.analyze(0, false)
+
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
-
-      const colors = ['#52D726', '#FFEC00', '#FF7300', '#FF0000', '#007ED6', '#7CDDDD']
-      const backgroundColor = repeatToLength(colors, data.length)
+      const backgroundColor = repeatToLength(DefaultDonut.colors, data.length)
+      const hoverBackgroundColor = repeatToLength(DefaultDonut.hoverColors, data.length)
 
       const result = {
         datasets: [{
           data: data,
-          backgroundColor: backgroundColor
+          backgroundColor: backgroundColor,
+          hoverBackgroundColor: hoverBackgroundColor
         }],
         labels: labels
       }
-      console.dir(JSON.stringify(result))
       return result
+    },
+    wordsLastNameStatistics () {
+      const strings = this.getConnections.map((element) => { return element[LinkedinConnectionsColumns.lastName] }).join(' ')
+      const stringAnalysisService = new StringAnalysisService()
+      stringAnalysisService.load(strings)
+      const analysis = stringAnalysisService.analyze(0, false)
+
+      const data = analysis.map((element) => element[1])
+      const labels = analysis.map((element) => capitalize(element[0]))
+      const backgroundColor = repeatToLength(DefaultDonut.colors, data.length)
+      const hoverBackgroundColor = repeatToLength(DefaultDonut.hoverColors, data.length)
+
+      const result = {
+        datasets: [{
+          data: data,
+          backgroundColor: backgroundColor,
+          hoverBackgroundColor: hoverBackgroundColor
+        }],
+        labels: labels
+      }
+      return result
+    },
+    wordsCompanyStatistics () {
+      const strings = this.getConnections.map((element) => { return element[LinkedinConnectionsColumns.company] }).join(' ')
+      const stringAnalysisService = new StringAnalysisService()
+      stringAnalysisService.load(strings)
+      const analysis = stringAnalysisService.analyze(0, false)
+
+      const data = analysis.map((element) => element[1])
+      const labels = analysis.map((element) => capitalize(element[0]))
+      const backgroundColor = repeatToLength(DefaultDonut.colors, data.length)
+      const hoverBackgroundColor = repeatToLength(DefaultDonut.hoverColors, data.length)
+
+      const result = {
+        datasets: [{
+          data: data,
+          backgroundColor: backgroundColor,
+          hoverBackgroundColor: hoverBackgroundColor
+        }],
+        labels: labels
+      }
+      return result
+    },
+    wordsPositionStatistics () {
+      const strings = this.getConnections.map((element) => { return element[LinkedinConnectionsColumns.position] }).join(' ')
+      const stringAnalysisService = new StringAnalysisService()
+      stringAnalysisService.load(strings)
+      const analysis = stringAnalysisService.analyze(0, false)
+
+      const data = analysis.map((element) => element[1])
+      const labels = analysis.map((element) => capitalize(element[0]))
+      const backgroundColor = repeatToLength(DefaultDonut.colors, data.length)
+      const hoverBackgroundColor = repeatToLength(DefaultDonut.hoverColors, data.length)
+
+      const result = {
+        datasets: [{
+          data: data,
+          backgroundColor: backgroundColor,
+          hoverBackgroundColor: hoverBackgroundColor
+        }],
+        labels: labels
+      }
+      return result
+    },
+    getChartsData () {
+      return [
+        {
+          name: 'First Name',
+          data: this.wordsFirstNameStatistics
+        },
+        {
+          name: 'Last Name',
+          data: this.wordsLastNameStatistics
+        },
+        {
+          name: 'Company',
+          data: this.wordsCompanyStatistics
+        },
+        {
+          name: 'Position',
+          data: this.wordsPositionStatistics
+        }
+      ]
     }
   },
   methods: {
-    getSelectedString () {
-      return this.selected.length === 0 ? '' : `${this.selected.length} record${this.selected.length > 1 ? 's' : ''} selected of ${this.getConnections.length}`
-    },
     changeMaxWords (newMaxWords) {
       this.wordscloud.maxWords = newMaxWords
     },

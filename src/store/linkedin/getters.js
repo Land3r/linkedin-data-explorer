@@ -1,4 +1,4 @@
-import { LinkedinTypes } from '../../data/linkedin'
+import { LinkedinTypes } from 'data/linkedin'
 
 export function getConnections (state) {
   return state.connections

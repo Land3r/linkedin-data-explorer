@@ -3,7 +3,7 @@ import * as mutationstypes from './mutations-types'
 
 import { Notify } from 'quasar'
 
-import { convertCsvToJson } from '../../helpers/convertHelper'
+import { convertCsvToJson } from 'helpers/convertHelper'
 
 export const actions = {
   async [actionstypes.LOAD_CONNECTIONS] ({ commit }, connections) {

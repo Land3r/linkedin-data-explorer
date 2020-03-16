@@ -165,8 +165,8 @@ import VueWordCloud from 'vuewordcloud'
 import download from 'downloadjs'
 
 import FontSelect from 'components/form/FontSelect'
-import { DefaultWordCloudConfig } from '../data/word-cloud'
-import { renderNodeToPng } from '../helpers/domHelper'
+import { DefaultWordCloudConfig } from 'data/word-cloud'
+import { renderNodeToPng } from 'helpers/domHelper'
 
 export default {
   name: 'WordsCloudContainer',
@@ -210,11 +210,11 @@ export default {
   },
   methods: {
     getColorAsset (imageName) {
-      var colors = require.context('../assets/colors/', false, /\.svg$/)
+      var colors = require.context('assets/colors/', false, /\.svg$/)
       return colors(`./${imageName}.svg`)
     },
     getRotationAsset (rotationName) {
-      var rotations = require.context('../assets/rotations/', false, /\.svg$/)
+      var rotations = require.context('assets/rotations/', false, /\.svg$/)
       return rotations(`./${rotationName}.svg`)
     },
     onUpdateProgress (updateState) {

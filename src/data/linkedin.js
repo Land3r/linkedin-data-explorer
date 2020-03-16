@@ -27,6 +27,112 @@ export const LinkedinFileName = {
 }
 
 /**
+ * The names of the columns of the connections csv.
+ */
+export const LinkedinConnectionsColumns = {
+  firstName: 'First Name',
+  lastName: 'Last Name',
+  emailAddress: 'Email Address',
+  company: 'Company',
+  position: 'Position',
+  connectedOn: 'Connected On'
+}
+
+/**
+ * The names of the columns of the contacts csv.
+ */
+export const LinkedinContactsColumns = {
+  source: 'Source',
+  firstName: 'FirstName',
+  lastName: 'LastName',
+  companies: 'Companies',
+  title: 'Title',
+  emails: 'Emails',
+  phoneNumbers: 'PhoneNumbers',
+  createdAt: 'CreatedAt',
+  addresses: 'Addresses',
+  sites: 'Sites',
+  instantMessageHandles: 'InstantMessageHandles',
+  fullName: 'FullName',
+  birthday: 'Birthday',
+  location: 'Locations',
+  bookmarkedAt: 'BookmarkedAt',
+  profiles: 'Profiles'
+}
+
+/**
+ * The names of the columns of the invitations csv.
+ */
+export const LinkedinInvitationsColumns = {
+  from: 'From',
+  to: 'To',
+  sentAt: 'Sent At',
+  message: 'Message',
+  direction: 'Direction'
+}
+
+/**
+ * The names of the columns of the messages csv.
+ */
+export const LinkedinMessagesColumns = {
+  from: 'FROM',
+  to: 'TO',
+  date: 'DATE',
+  subject: 'SUBJECT',
+  content: 'CONTENT',
+  direction: 'DIRECTION',
+  folder: 'FOLDER'
+}
+
+/**
+ * The names of the columns of the profile csv.
+ */
+export const LinkedinProfileColumns = {
+  firstName: 'First Name',
+  lastName: 'Last Name',
+  maidenName: 'Maiden Name',
+  address: 'Address',
+  birthDate: 'Birth Date',
+  headline: 'Headline',
+  summary: 'Summary',
+  industry: 'Industry',
+  zipCode: 'Zip Code',
+  geoLocation: 'Geo Location',
+  twitterHandles: 'Twitter Handles',
+  websites: 'Websites',
+  instantMessengers: 'Instant Messengers'
+}
+
+/**
+ * The names of the columns of the recommendations given csv.
+ */
+export const LinkedinRecommendationsGivenColumns = {
+  firstName: 'First Name',
+  lastName: 'Last Name',
+  company: 'Company',
+  jobTitle: 'Job Title',
+  text: 'Text',
+  creationDate: 'Creation Date',
+  status: 'Status'
+}
+
+/**
+ * The names of the columns of the recommendations received csv.
+ */
+export const LinkedinRecommendationsReceivedColumns = {
+  ...LinkedinRecommendationsGivenColumns
+}
+
+/**
+ * The names of the columns of the registrations csv.
+ */
+export const LinkedinRegistrationsColumns = {
+  registeredAt: 'Registered At',
+  registrationIp: 'Registration Ip',
+  subscriptionTypes: 'Subscription Types'
+}
+
+/**
  * The details associated with the LinkedinTypes.
  */
 export const LinkedinTypesDetails = [

@@ -64,7 +64,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import NavigationMenuLink from 'components/navigation/NavigationMenuLink'
-import { LinkedinTypesDetails } from '../data/linkedin'
+import { LinkedinTypesDetails } from 'data/linkedin'
 
 export default {
   name: 'MainLayout',
