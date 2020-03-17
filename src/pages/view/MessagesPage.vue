@@ -63,6 +63,7 @@ import { repeatToLength } from 'helpers/arrayHelper'
 import { convertJsonArrayToString } from 'helpers/stringHelper'
 import { DefaultDonut } from 'data/chart'
 import { LinkedinTypesDetails, LinkedinTypes, LinkedinMessagesColumns } from 'data/linkedin'
+import { LinkedinMessagesDirection } from '../../data/linkedin'
 
 export default {
   name: 'MessagesPage',
@@ -94,6 +95,14 @@ export default {
         cleanLocalized: true
       },
       columns: [
+        {
+          name: 'direction',
+          label: 'Direction',
+          align: 'center',
+          field: LinkedinMessagesColumns.direction,
+          sortable: true,
+          format: (val, row) => this.formatDirection(val, row)
+        },
         {
           name: 'from',
           label: 'From',
@@ -127,13 +136,6 @@ export default {
           label: 'Content',
           align: 'center',
           field: LinkedinMessagesColumns.content,
-          sortable: true
-        },
-        {
-          name: 'direction',
-          label: 'Direction',
-          align: 'center',
-          field: LinkedinMessagesColumns.direction,
           sortable: true
         }
       ]
@@ -293,6 +295,15 @@ export default {
     },
     changeCleanLocalized (newCleanLocalizedValue) {
       this.wordscloud.cleanLocalized = newCleanLocalizedValue
+    },
+    formatDirection (val, row) {
+      if (val === LinkedinMessagesDirection.in) {
+        return '\u{1f4e5} In'
+      } else if (val === LinkedinMessagesDirection.out) {
+        return '\u{1f4e4} Out'
+      } else {
+        return val
+      }
     }
   }
 }

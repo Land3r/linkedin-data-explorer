@@ -63,6 +63,7 @@ import { repeatToLength } from 'helpers/arrayHelper'
 import { convertJsonArrayToString } from 'helpers/stringHelper'
 import { DefaultDonut } from 'data/chart'
 import { LinkedinTypesDetails, LinkedinTypes, LinkedinContactsColumns } from 'data/linkedin'
+import { LinkedinContactsSource } from '../../data/linkedin'
 
 export default {
   name: 'ContactsPage',
@@ -99,8 +100,8 @@ export default {
           label: 'Source',
           align: 'left',
           field: LinkedinContactsColumns.source,
-          sortable: true
-          // format: 'TODO'
+          sortable: true,
+          format: (val, row) => this.formatSource(val, row)
         },
         {
           name: 'firstname',
@@ -258,6 +259,17 @@ export default {
     },
     changeCleanLocalized (newCleanLocalizedValue) {
       this.wordscloud.cleanLocalized = newCleanLocalizedValue
+    },
+    formatSource (val, row) {
+      if (val === LinkedinContactsSource.mobile) {
+        return '\u{1f4f1} Mobile'
+      } else if (val === LinkedinContactsSource.google) {
+        return '\u{1f4f2} Google'
+      } else if (val === LinkedinContactsSource.abook) {
+        return '\u{1f4d4} Address Book Import'
+      } else {
+        return val
+      }
     }
   }
 }

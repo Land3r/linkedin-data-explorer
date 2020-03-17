@@ -29,7 +29,6 @@
           </q-tab-panel>
 
           <q-tab-panel name="charts">
-            <charts-container :data="getChartsData" />
           </q-tab-panel>
 
           <q-tab-panel name="words">
@@ -53,7 +52,6 @@
 import { mapGetters } from 'vuex'
 
 import TableContainer from 'components/containers/TableContainer'
-import ChartsContainer from 'components/containers/ChartsContainer'
 import WordsCloudContainer from 'components/containers/WordsCloudContainer'
 import NavigationBar from 'components/navigation/NavigationBar'
 import StringAnalysisService from 'services/StringAnalysisService'
@@ -65,7 +63,6 @@ export default {
   components: {
     'navigation-bar': NavigationBar,
     'table-container': TableContainer,
-    'charts-container': ChartsContainer,
     'words-cloud-container': WordsCloudContainer
   },
   data () {

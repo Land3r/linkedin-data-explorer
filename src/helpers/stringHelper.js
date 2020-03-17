@@ -8,7 +8,6 @@ const defaultSeparator = ' '
  */
 export function convertJsonArrayToString (json, columns) {
   var result = ''
-  console.dir(json)
 
   json.map((row) => {
     for (const column in columns) {

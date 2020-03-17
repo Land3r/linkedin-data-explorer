@@ -65,6 +65,10 @@ export default class StringAnalysisService {
     return sortedWords
   }
 
+  /**
+   * Sanitize the input string from common special chars.
+   * @param {string} input The input string to sanitize.
+   */
   sanitize (input) {
     const output = input
       .replace(/\./gm, ' ')
@@ -94,6 +98,10 @@ export default class StringAnalysisService {
     return output
   }
 
+  /**
+   * Sanitize the input string from 'fr-FR' French language common words.
+   * @param {string} input The input string to sanitize.
+   */
   sanitizeCommonLocales (input) {
     const output = input
       .replace(/ des /gm, ' ')

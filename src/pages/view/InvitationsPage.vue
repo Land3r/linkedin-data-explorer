@@ -62,7 +62,7 @@ import StringAnalysisService from 'services/StringAnalysisService'
 import { repeatToLength } from 'helpers/arrayHelper'
 import { convertJsonArrayToString } from 'helpers/stringHelper'
 import { DefaultDonut } from 'data/chart'
-import { LinkedinTypesDetails, LinkedinTypes, LinkedinInvitationsColumns } from 'data/linkedin'
+import { LinkedinTypesDetails, LinkedinTypes, LinkedinInvitationsColumns, LinkedinInvitationsDirection } from 'data/linkedin'
 
 export default {
   name: 'InvitationsPage',
@@ -95,6 +95,14 @@ export default {
       },
       columns: [
         {
+          name: 'direction',
+          label: 'Direction',
+          align: 'center',
+          field: LinkedinInvitationsColumns.direction,
+          sortable: true,
+          format: (val, row) => this.formatDirection(val, row)
+        },
+        {
           name: 'from',
           label: 'From',
           align: 'left',
@@ -121,13 +129,6 @@ export default {
           align: 'center',
           field: LinkedinInvitationsColumns.message,
           sortable: true
-        },
-        {
-          name: 'direction',
-          label: 'Direction',
-          align: 'center',
-          field: LinkedinInvitationsColumns.direction,
-          sortable: true
         }
       ]
     }
@@ -137,14 +138,12 @@ export default {
       'getInvitations'
     ]),
     wordsWithWeight () {
-      console.log(this.getInvitations)
       const strings = convertJsonArrayToString(this.getInvitations, [
         LinkedinInvitationsColumns.from,
         LinkedinInvitationsColumns.to,
         LinkedinInvitationsColumns.message,
         LinkedinInvitationsColumns.direction
       ])
-      console.log(strings)
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
       const result = stringAnalysisService.analyze(this.wordscloud.maxWords, this.wordscloud.cleanLocalized)
@@ -257,6 +256,15 @@ export default {
     },
     changeCleanLocalized (newCleanLocalizedValue) {
       this.wordscloud.cleanLocalized = newCleanLocalizedValue
+    },
+    formatDirection (val, row) {
+      if (val === LinkedinInvitationsDirection.in) {
+        return '\u{1f4e5} In'
+      } else if (val === LinkedinInvitationsDirection.out) {
+        return '\u{1f4e4} Out'
+      } else {
+        return val
+      }
     }
   }
 }

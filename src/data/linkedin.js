@@ -60,6 +60,12 @@ export const LinkedinContactsColumns = {
   profiles: 'Profiles'
 }
 
+export const LinkedinContactsSource = {
+  mobile: 'MOBILE_CONTACTS',
+  google: 'GOOGLE_CONTACTS',
+  abook: 'ABOOK_IMPORT'
+}
+
 /**
  * The names of the columns of the invitations csv.
  */
@@ -69,6 +75,11 @@ export const LinkedinInvitationsColumns = {
   sentAt: 'Sent At',
   message: 'Message',
   direction: 'Direction'
+}
+
+export const LinkedinInvitationsDirection = {
+  in: 'INCOMING',
+  out: 'OUTGOING'
 }
 
 /**
@@ -82,6 +93,10 @@ export const LinkedinMessagesColumns = {
   content: 'CONTENT',
   direction: 'DIRECTION',
   folder: 'FOLDER'
+}
+
+export const LinkedinMessagesDirection = {
+  ...LinkedinInvitationsDirection
 }
 
 /**
