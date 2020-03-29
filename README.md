@@ -1,5 +1,7 @@
 # Linkedin Data Explorer (linkedin-data-explorer)
 
+![David](https://img.shields.io/david/land3r/linkedin-data-explorer)
+
 A Visualizer for Linkedin data
 
 ## Install the dependencies
