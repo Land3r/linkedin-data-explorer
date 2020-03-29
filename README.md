@@ -1,8 +1,14 @@
-# Linkedin Data Explorer (linkedin-data-explorer)
+# Linkedin Data Explorer
 
+A Visualizer for your Linkedin data
+
+![GitHub package.json version](https://img.shields.io/github/package-json/v/land3r/linkedin-data-explorer)
 ![David](https://img.shields.io/david/land3r/linkedin-data-explorer)
 
-A Visualizer for Linkedin data
+![GitHub issues](https://img.shields.io/github/issues-raw/land3r/linkedin-data-explorer)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/land3r/linkedin-data-explorer)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/land3r/linkedin-data-explorer)
+
 
 ## Install the dependencies
 ```bash
