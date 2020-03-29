@@ -127,12 +127,8 @@ export default {
         } else if (id === LinkedinTypes.registrations) {
           this[LinkedinActionsTypes.RESET_REGISTRATIONS]()
         }
-      }).onOk(() => {
-        // console.log('>>>> second OK catcher')
       }).onCancel(() => {
-        // console.log('>>>> Cancel')
       }).onDismiss(() => {
-        // console.log('I am triggered on both OK and Cancel')
       })
     },
     getDataLength (dataType) {
