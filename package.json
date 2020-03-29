@@ -19,6 +19,7 @@
     "csvtojson": "^2.0.10",
     "downloadjs": "^1.4.7",
     "html-to-image": "^0.1.1",
+    "json-formatter-js": "^2.3.4",
     "quasar": "^1.0.0",
     "vue-chartjs": "^3.5.0",
     "vuewordcloud": "^18.7.11",
