@@ -266,6 +266,10 @@ export default {
         this.changeCleanLocalized(newValue)
       }
     }
+  },
+  beforeDestroy: function () {
+    // Ensures to stop the loading bar and dispose of it.
+    this.$q.loadingBar.stop()
   }
 }
 </script>
