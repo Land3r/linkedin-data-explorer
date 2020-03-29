@@ -21,9 +21,11 @@
 
         <q-tab-panels v-model="activeTab" animated>
           <q-tab-panel name="raw">
+            <object-container :data="getProfile" title="Profile"/>
           </q-tab-panel>
 
           <q-tab-panel name="charts">
+            <charts-container :data="[]" />
           </q-tab-panel>
 
           <q-tab-panel name="words">
@@ -45,9 +47,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
-import WordsCloudContainer from 'components/containers/WordsCloudContainer'
 import NavigationBar from 'components/navigation/NavigationBar'
+import ObjectContainer from 'components/containers/ObjectContainer'
+import ChartsContainer from 'components/containers/ChartsContainer'
+import WordsCloudContainer from 'components/containers/WordsCloudContainer'
 import StringAnalysisService from 'services/StringAnalysisService'
 import { convertJsonToString } from 'helpers/stringHelper'
 import { LinkedinTypesDetails, LinkedinTypes, LinkedinProfileColumns } from 'data/linkedin'
@@ -56,6 +59,8 @@ export default {
   name: 'ProfilePage',
   components: {
     'navigation-bar': NavigationBar,
+    'object-container': ObjectContainer,
+    'charts-container': ChartsContainer,
     'words-cloud-container': WordsCloudContainer
   },
   data () {

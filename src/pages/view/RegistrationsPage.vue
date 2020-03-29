@@ -29,6 +29,7 @@
           </q-tab-panel>
 
           <q-tab-panel name="charts">
+            <charts-container :data="[]" />
           </q-tab-panel>
 
           <q-tab-panel name="words">
@@ -54,6 +55,7 @@ import { mapGetters } from 'vuex'
 import TableContainer from 'components/containers/TableContainer'
 import WordsCloudContainer from 'components/containers/WordsCloudContainer'
 import NavigationBar from 'components/navigation/NavigationBar'
+import ChartsContainer from 'components/containers/ChartsContainer'
 import StringAnalysisService from 'services/StringAnalysisService'
 import { convertJsonArrayToString } from 'helpers/stringHelper'
 import { LinkedinTypesDetails, LinkedinTypes, LinkedinRegistrationsColumns } from 'data/linkedin'
@@ -63,6 +65,7 @@ export default {
   components: {
     'navigation-bar': NavigationBar,
     'table-container': TableContainer,
+    'charts-container': ChartsContainer,
     'words-cloud-container': WordsCloudContainer
   },
   data () {

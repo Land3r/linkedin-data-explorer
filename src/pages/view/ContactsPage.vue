@@ -175,7 +175,7 @@ export default {
       const strings = this.getContacts.map((element) => { return element[LinkedinContactsColumns.source] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, this.wordscloud.cleanLocalized)
 
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
@@ -198,7 +198,7 @@ export default {
       const strings = this.getContacts.map((element) => { return element[LinkedinContactsColumns.firstName] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, this.wordscloud.cleanLocalized)
 
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
@@ -219,7 +219,7 @@ export default {
       const strings = this.getContacts.map((element) => { return element[LinkedinContactsColumns.lastName] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, this.wordscloud.cleanLocalized)
 
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))

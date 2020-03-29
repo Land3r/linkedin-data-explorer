@@ -153,7 +153,7 @@ export default {
       const strings = this.getInvitations.map((element) => { return element[LinkedinInvitationsColumns.direction] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, this.wordscloud.cleanLocalized)
 
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
@@ -174,7 +174,7 @@ export default {
       const strings = this.getInvitations.map((element) => { return element[LinkedinInvitationsColumns.from] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, this.wordscloud.cleanLocalized)
 
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
@@ -195,7 +195,7 @@ export default {
       const strings = this.getInvitations.map((element) => { return element[LinkedinInvitationsColumns.to] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, this.wordscloud.cleanLocalized)
 
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
@@ -216,7 +216,7 @@ export default {
       const strings = this.getInvitations.map((element) => { return element[LinkedinInvitationsColumns.message] }).join(' ')
       const stringAnalysisService = new StringAnalysisService()
       stringAnalysisService.load(strings)
-      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, false)
+      const analysis = stringAnalysisService.analyze(DefaultDonut.maxPies, this.wordscloud.cleanLocalized)
 
       const data = analysis.map((element) => element[1])
       const labels = analysis.map((element) => capitalize(element[0]))
